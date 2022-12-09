@@ -30,3 +30,45 @@
 *.exe
 *.out
 *.app
+
+# cmake/make
+**/cmake-build-debug
+**/CMakeCache.txt
+**/cmake_install.cmake
+**/install_manifest.txt
+**/CMakeFiles/
+**/CTestTestfile.cmake
+**/Makefile
+**/*.cbp
+**/CMakeScripts
+**/compile_commands.json
+
+## Local 
+
+.idea/*.xml
+
+build/**/*
+
+include/*
+lib/*
+bin/*
+test/test_runner
+test/lib
+
+# Large media files
+*.mp4
+*.tiff
+*.avi
+*.flv
+*.mov
+*.wmv
+
+# IDE
+.vscode
+
+# macOS
+.DS_Store
+**/*.dSYM/
+
+# Windows
+Thumbs.db
