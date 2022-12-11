@@ -38,7 +38,7 @@
 **/install_manifest.txt
 **/CMakeFiles/
 **/CTestTestfile.cmake
-**/Makefile
+# **/Makefile
 **/*.cbp
 **/CMakeScripts
 **/compile_commands.json
@@ -72,3 +72,6 @@ test/lib
 
 # Windows
 Thumbs.db
+
+# python virtual environment
+.venv
