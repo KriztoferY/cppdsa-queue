@@ -1,13 +1,29 @@
-# REF:
-# https://github.com/kigster/cmake-project-template
+# 3.12: support for C++20
+# 3.15: generator expressions
+cmake_minimum_required(VERSION 3.15) 
 
-cmake_minimum_required(VERSION 3.12) # with support for C++20
+project(cppdsa-queue VERSION 0.1.0 LANGUAGES CXX)
 
-project(strplay VERSION 0.1.0 LANGUAGES C CXX)
+set(CMAKE_DEBUG_POSTFIX d)
+configure_file(ProjectConfig.h.in ProjectConfig.h)
 
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20 -g -Og")
-# set(CMAKE_CXX_EXTENSIONS YES)
+add_library(project_compiler_flags INTERFACE)
+target_compile_features(project_compiler_flags INTERFACE cxx_std_20)
+
+# Add compiler warning flags just when building this project via
+# the BUILD_INTERFACE genex
+set(gcc_like_cxx "$<COMPILE_LANG_AND_ID:CXX,ARMClang,AppleClang,Clang,GNU,LCC>")
+set(msvc_cxx "$<COMPILE_LANG_AND_ID:CXX,MSVC>")
+target_compile_options(project_compiler_flags INTERFACE
+  "$<${gcc_like_cxx}:$<BUILD_INTERFACE:-Wall;-Wextra;-Wshadow;-Wformat=2;-Wunused>>"
+  "$<${msvc_cxx}:$<BUILD_INTERFACE:-W3>>"
+)
+
+# if(APPLE)
+#   set(CMAKE_INSTALL_RPATH "@executable_path/../lib")
+# elseif(UNIX)
+#   set(CMAKE_INSTALL_RPATH "$ORIGIN/../lib")
+# endif()
 
 set(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR})
 
@@ -16,12 +32,11 @@ set(APP_INSTALL_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 set(APP_INSTALL_BIN_DIR ${PROJECT_SOURCE_DIR}/bin)
 set(APP_INSTALL_LIB_DIR ${PROJECT_SOURCE_DIR}/lib)
 
+enable_testing()    # CAVEAT: must be in top-level CMakeLists.txt
+
 # === header dir ===
-set(STR_UTILS_HEADER_DIR ${PROJECT_SOURCE_DIR}/src/str_utils)
+set(QUEUE_HEADER_DIR ${PROJECT_SOURCE_DIR}/src/queue)
 
-include_directories(${APP_INSTALL_INCLUDE_DIR})
-include_directories(${STR_UTILS_HEADER_DIR})
-
-add_subdirectory(src)
-add_subdirectory(test)
+add_subdirectory(src)       # shared library
+add_subdirectory(test)      # tests
 # add_subdirectory(benchmark)

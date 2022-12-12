@@ -3,11 +3,15 @@
 #include <string>     // stoull()
 #include <numbers>    // numbers
 
-#include "queue/circ_array_queue.hpp"
+#include "circ_array_queue.hpp"
+#include "ProjectConfig.h"
 
 using namespace std;
 
 void print_usage(const string& executable) {
+    std::cout << executable << " Version " << CppdsaQueue_VERSION_MAJOR << "."
+              << CppdsaQueue_VERSION_MINOR << "." << CppdsaQueue_VERSION_PATCH
+              << std::endl;
     std::cout << "USAGE: " << executable << " <num_elems>" << std::endl;
     exit(EXIT_FAILURE);
 }
