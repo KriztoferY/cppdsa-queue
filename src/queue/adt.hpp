@@ -128,7 +128,8 @@ public:
     void        dequeue();
 
     /**
-     * @brief Create a new element in-place after the element of this queue.
+     * @brief Create a new element in-place after the last element of this
+     * queue.
      *
      * The new element is constructed in-place using all of the arguments
      * passed to this member function.
