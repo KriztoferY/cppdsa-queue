@@ -22,8 +22,8 @@ bool IQueue<Elem, Impl>::empty() const noexcept {
 }
 
 template <typename Elem, template <typename> typename Impl>
-void IQueue<Elem, Impl>::iter(std::function<void(Elem const&)> visit) const {
-    derived_()->iter_(visit);
+void IQueue<Elem, Impl>::iter(std::function<void(Elem const&)> action) const {
+    derived_()->iter_(action);
 }
 
 template <typename Elem, template <typename> typename Impl>

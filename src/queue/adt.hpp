@@ -1,11 +1,11 @@
 /**
- *  \file      adt.hpp
- *  \brief     Queue ADT
- *  \details   Defines the API of the Queue ADT.
- *  \author    KriztoferY
- *  \version   1.0.0
- *  \date      2022.12.08
- *  \copyright Copyright (c) 2022 KriztoferY. All rights reserved.
+ *  @file      adt.hpp
+ *  @brief     Queue ADT
+ *  @details   Defines the API of the Queue ADT.
+ *  @author    KriztoferY
+ *  @version   0.1.0
+ *  @date      2022.12.08
+ *  @copyright Copyright (c) 2022 KriztoferY. All rights reserved.
  */
 
 #ifndef ADT_HPP_
@@ -17,16 +17,29 @@
 #include <exception>     // exception
 #include <string>        // string
 
+/** Top-level namespace for all `cppdsa-*` libraries. */
 namespace dsa
 {
 
+/**
+ * @brief Empty queue error.
+ *
+ * An exception that indicates an operation on the queue is invalid when the
+ * queue is empty.
+ */
 class EmptyQueueError : public std::exception
 {
+    /** Default message */
     static constexpr const char* default_msg_ =
         "invalid operation on an empty queue";
     std::string msg_;
 
 public:
+    /**
+     * @brief Construct a new Empty Queue Error object.
+     *
+     * @param custom_message A customized message.
+     */
     EmptyQueueError(std::string custom_message = "")
         : msg_ { custom_message } {}
 
@@ -37,6 +50,23 @@ public:
 
 // -----------------------------------------------------------------------------
 
+/**
+ * @brief The queue abstract data type (ADT)
+ *
+ * A sequential ADT that emulates the first-in-first-out behavior of a queue in
+ * real world. This class template specifies the API for all implementations of
+ * the queue ADT in the `cppdsa-queue` library.
+ *
+ * @tparam Elem The element type.
+ * @tparam Impl The derived implementation class.
+ * @note All implementations of the queue ADT must statically inherit this
+ *      class template using the Curiously Recurring Template Pattern (CRTP).
+ *      The inherited class template must implement the private member functions
+ *      `_size()`, `_empty()`, `_iter()`, `_front()`, `_enqueue()` (matching 2
+ *      corresponding overloads), `_dequeue()`, and `_emplace<...Args>()`,
+ *      unless the client code of the inherited class template will not require
+ *      certain operations.
+ */
 template <typename Elem, template <typename> typename Impl>
 class IQueue
 {
@@ -48,15 +78,69 @@ public:
 
     virtual ~IQueue();
 
+    /** Number of elements in the queue. */
     std::size_t size() const noexcept;
+
+    /** Determine if this queue has no elements. */
     bool        empty() const noexcept;
-    void        iter(std::function<void(Elem const&)>) const;
+
+    /**
+     * @brief Iterate over all elements of this queue from the front.
+     *
+     * The given operation will be performed on each element iterated.
+     *
+     * @param action The operation to be performed on each element.
+     */
+    void        iter(std::function<void(Elem const&)> action) const;
+
+    /**
+     * @brief Query the element at the front of this queue.
+     *
+     * @returns The front element.
+     * @throws dsa::EmptyQueueError if the queue is empty.
+     */
     Elem const& front() const;
 
+    /**
+     * @brief Add an element to the end of this queue.
+     *
+     * A deep copy of the element will be copy-constructed and then put into
+     * the queue.
+     *
+     * @param elem The element to be added.
+     */
     void        enqueue(Elem const& elem);
+
+    /**
+     * @brief Add an element to the end of this queue.
+     *
+     * The element will be put into the queue using move semantics.
+     *
+     * @param elem The element to be added.
+     */
     void        enqueue(Elem&& elem);
+
+    /**
+     * @brief Remove the element at end of this queue.
+     *
+     * @throws dsa::EmptyQueueError if this queue is empty.
+     */
     void        dequeue();
 
+    /**
+     * @brief Create a new element in-place after the element of this queue.
+     *
+     * The new element is constructed in-place using all of the arguments
+     * passed to this member function.
+     *
+     * @tparam Args Types of the arguments to be passed to the constructor of
+     *      the element type `Elem`.
+     * @param args Variable number of arguments to be passed to the constructor
+     *      of the element type `Elem`.
+     * @note Strictly speaking, this is a convenient member function, and hence
+     *      implementations without `_emplace<...Args>()` is still considered
+     *      complete with respect to the Queue ADT in theory.
+     */
     template <typename... Args>
     void emplace(Args&&... args);
 

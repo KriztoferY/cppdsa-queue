@@ -11,10 +11,27 @@ Welcome to cppdsa-queue's documentation!
    :caption: Contents:
 
 
-
 Indices and tables
 ==================
 
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+
+The Queue ADT
+=============
+
+.. doxygenclass:: dsa::IQueue
+   :project: cppdsa-queue
+   :members:
+
+Circular Array Queue
+====================
+
+.. doxygenclass:: dsa::CircArrayQueue
+   :project: cppdsa-queue
+   :members: 
+   :private-members:
+
+
