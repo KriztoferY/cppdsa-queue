@@ -43,6 +43,10 @@
 **/CMakeScripts
 **/compile_commands.json
 
+# Documentation - compiled files
+docs/doxygen
+docs/build
+
 ## Local 
 
 .idea/*.xml
