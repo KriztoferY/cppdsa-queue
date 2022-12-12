@@ -45,7 +45,7 @@ CircArrayQueue<Elem>::CircArrayQueue(CircArrayQueue&& other)
 template <typename Elem>
 CircArrayQueue<Elem>&
     CircArrayQueue<Elem>::operator=(CircArrayQueue const& other) {
-    delete elems_;
+    delete[] elems_;
     elems_     = new Elem[other.capacity_];
     capacity_  = other.capacity_;
     start_idx_ = other.start_idx_;
