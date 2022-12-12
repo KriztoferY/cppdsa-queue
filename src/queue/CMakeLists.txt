@@ -19,5 +19,5 @@ target_include_directories(queue
                             $<INSTALL_INTERFACE:${APP_INSTALL_INCLUDE_DIR}>
                            )
 
-install(TARGETS queue DESTINATION ${APP_INSTALL_LIB_DIR})
+# install(TARGETS queue DESTINATION ${APP_INSTALL_LIB_DIR})
 install(FILES ${INCLUDE_FILES} DESTINATION ${APP_INSTALL_INCLUDE_DIR})
