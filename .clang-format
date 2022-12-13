@@ -21,7 +21,7 @@ AlignConsecutiveBitFields:
   PadOperators:    false
 AlignConsecutiveDeclarations:
   Enabled:         true             # custom
-  AcrossEmptyLines: true            # custom
+  AcrossEmptyLines: false           
   AcrossComments:  true             # custom
   AlignCompound:   true             # custom
   PadOperators:    true             # custom

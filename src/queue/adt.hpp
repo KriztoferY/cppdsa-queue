@@ -85,7 +85,7 @@ public:
     std::size_t size() const noexcept;
 
     /** Determine if this queue has no elements. */
-    bool        empty() const noexcept;
+    bool empty() const noexcept;
 
     /**
      * @brief Iterate over all elements of this queue from the front.
@@ -94,7 +94,7 @@ public:
      *
      * @param action The operation to be performed on each element.
      */
-    void        iter(std::function<void(Elem const&)> action) const;
+    void iter(std::function<void(Elem const&)> action) const;
 
     /**
      * @brief Access the element at the front of this queue.
@@ -102,7 +102,7 @@ public:
      * @returns The front element.
      * @throws dsa::EmptyQueueError if the queue is empty.
      */
-    Elem&       front();
+    Elem& front();
 
     /**
      * @brief Access (read-only) the element at the front of this queue.
@@ -120,7 +120,7 @@ public:
      *
      * @param elem The element to be added.
      */
-    void        enqueue(Elem const& elem);
+    void enqueue(Elem const& elem);
 
     /**
      * @brief Add an element to the end of this queue.
@@ -129,14 +129,14 @@ public:
      *
      * @param elem The element to be added.
      */
-    void        enqueue(Elem&& elem);
+    void enqueue(Elem&& elem);
 
     /**
      * @brief Remove the element at end of this queue.
      *
      * @throws dsa::EmptyQueueError if this queue is empty.
      */
-    void        dequeue();
+    void dequeue();
 
     /**
      * @brief Create a new element in-place after the last element of this
