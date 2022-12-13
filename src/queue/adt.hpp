@@ -29,23 +29,26 @@ namespace dsa
  */
 class EmptyQueueError : public std::exception
 {
-    /** Default message */
-    static constexpr const char* default_msg_ =
-        "invalid operation on an empty queue";
     std::string msg_;
 
 public:
     /**
      * @brief Construct a new Empty Queue Error object.
      *
-     * @param custom_message A customized message.
+     * @param custom_message A custom message. Defaults to `""`.
+     * @note If no custom message is provided, the default error message will
+     *      be used.
      */
     EmptyQueueError(std::string custom_message = "")
         : msg_ { custom_message } {}
 
     const char* what() const noexcept override {
-        return msg_.empty() ? default_msg_ : msg_.c_str();
+        return msg_.empty() ? default_msg : msg_.c_str();
     }
+
+    /** Default error message */
+    static constexpr const char* default_msg =
+        "invalid operation on an empty queue";
 };
 
 // -----------------------------------------------------------------------------

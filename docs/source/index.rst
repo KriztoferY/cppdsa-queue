@@ -26,6 +26,13 @@ The Queue ADT
    :project: cppdsa-queue
    :members:
 
+Exception Classes
+=================
+
+.. doxygenclass:: dsa::EmptyQueueError
+   :project: cppdsa-queue
+   :members:
+
 Circular Array Queue
 ====================
 
