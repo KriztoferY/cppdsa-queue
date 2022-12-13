@@ -93,9 +93,17 @@ private:
     void        iter_(std::function<void(Elem const&)>) const;
 
     /**
-     * @brief Query the element at the front of this queue.
+     * @brief Access the element at the front of this queue.
      *
      * @returns The front element.
+     * @throws dsa::EmptyQueueError if the queue is empty.
+     */
+    Elem&       front_();
+
+    /**
+     * @brief Access (read-only) the element at the front of this queue.
+     *
+     * @returns The front element (immutable).
      * @throws dsa::EmptyQueueError if the queue is empty.
      */
     Elem const& front_() const;

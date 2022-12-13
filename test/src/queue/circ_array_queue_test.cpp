@@ -106,3 +106,15 @@ TEST(CircArrayQueueTest, EnqueuePeekDeqeueIdiomWorks) {
     EXPECT_EQ(q.size(), 0);
     EXPECT_GT(q.capacity(), 0);
 }
+
+// Non-const front
+TEST(CircArrayQueueTest, NonconstFrontReturnValueIsMutable) {
+    auto q = IntCircArrayQueue(8);
+    q.enqueue(3);
+    q.enqueue(1);
+    q.enqueue(4);
+    auto& elem = q.front();
+    EXPECT_EQ(elem, 3);
+    elem = 2;
+    EXPECT_EQ(q.front(), 2);
+}

@@ -61,11 +61,11 @@ public:
  * @tparam Impl The derived implementation class.
  * @note All implementations of the queue ADT must statically inherit this
  *      class template using the Curiously Recurring Template Pattern (CRTP).
- *      The inherited class template must implement the private member functions
- *      `_size()`, `_empty()`, `_iter()`, `_front()`, `_enqueue()` (matching 2
- *      corresponding overloads), `_dequeue()`, and `_emplace<...Args>()`,
- *      unless the client code of the inherited class template will not require
- *      certain operations.
+ *      The inherited class template must implement the private member
+ *      functions `_size()`, `_empty()`, `_iter()`, `_front()`, `_enqueue()`,
+ *      `_dequeue()`, and `_emplace<...Args>()` for the respective parent class
+ *      member functions, including all overloads, unless the client code of
+ *      the inherited class template will not require certain operations.
  */
 template <typename Elem, template <typename> typename Impl>
 class IQueue
@@ -94,9 +94,17 @@ public:
     void        iter(std::function<void(Elem const&)> action) const;
 
     /**
-     * @brief Query the element at the front of this queue.
+     * @brief Access the element at the front of this queue.
      *
      * @returns The front element.
+     * @throws dsa::EmptyQueueError if the queue is empty.
+     */
+    Elem&       front();
+
+    /**
+     * @brief Access (read-only) the element at the front of this queue.
+     *
+     * @returns The front element (immutable).
      * @throws dsa::EmptyQueueError if the queue is empty.
      */
     Elem const& front() const;

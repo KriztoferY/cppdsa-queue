@@ -27,7 +27,12 @@ void IQueue<Elem, Impl>::iter(std::function<void(Elem const&)> action) const {
 }
 
 template <typename Elem, template <typename> typename Impl>
-const Elem& IQueue<Elem, Impl>::front() const {
+Elem& IQueue<Elem, Impl>::front() {
+    return derived_()->front_();
+}
+
+template <typename Elem, template <typename> typename Impl>
+Elem const& IQueue<Elem, Impl>::front() const {
     return derived_()->front_();
 }
 

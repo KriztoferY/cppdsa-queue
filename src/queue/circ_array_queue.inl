@@ -99,6 +99,12 @@ void CircArrayQueue<Elem>::iter_(std::function<void(Elem const&)> visit) const {
 }
 
 template <typename Elem>
+Elem& CircArrayQueue<Elem>::front_() {
+    return const_cast<Elem&>(
+        const_cast<const CircArrayQueue<Elem>*>(this)->front_());
+}
+
+template <typename Elem>
 Elem const& CircArrayQueue<Elem>::front_() const {
     if (num_elems_ == 0) throw EmptyQueueError {};
     return elems_[start_idx_];
