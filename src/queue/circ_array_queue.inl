@@ -11,9 +11,7 @@ CircArrayQueue<Elem>::CircArrayQueue(std::size_t init_cap)
     : elems_ { new Elem[init_cap] }, capacity_ { init_cap } {}
 
 template <typename Elem>
-CircArrayQueue<Elem>::~CircArrayQueue() {
-    delete[] elems_;
-}
+CircArrayQueue<Elem>::~CircArrayQueue() {}
 
 // clang-format off
 
@@ -29,7 +27,7 @@ CircArrayQueue<Elem>::CircArrayQueue(CircArrayQueue const& other)
 
 template <typename Elem>
 CircArrayQueue<Elem>::CircArrayQueue(CircArrayQueue&& other) noexcept
-    : elems_ { other.elems_ }, 
+    : elems_ { std::move(other.elems_) }, 
       capacity_ { other.capacity_ },
       start_idx_ { other.start_idx_ }, 
       num_elems_ { other.num_elems_ } 
@@ -45,8 +43,7 @@ CircArrayQueue<Elem>::CircArrayQueue(CircArrayQueue&& other) noexcept
 template <typename Elem>
 CircArrayQueue<Elem>&
     CircArrayQueue<Elem>::operator=(CircArrayQueue const& other) {
-    delete[] elems_;
-    elems_     = new Elem[other.capacity_];
+    elems_     = std::unique_ptr<Elem[]> { new Elem[other.capacity_] };
     capacity_  = other.capacity_;
     start_idx_ = other.start_idx_;
     num_elems_ = other.num_elems_;
@@ -56,13 +53,12 @@ CircArrayQueue<Elem>&
 template <typename Elem>
 CircArrayQueue<Elem>&
     CircArrayQueue<Elem>::operator=(CircArrayQueue&& other) noexcept {
-    delete[] elems_;
-    elems_           = other.elems_;
+    std::swap(elems_, other.elems_);
+
     capacity_        = other.capacity_;
     start_idx_       = other.start_idx_;
     num_elems_       = other.num_elems_;
 
-    other.elems_     = nullptr;
     other.capacity_  = 0;
     other.start_idx_ = 0;
     other.num_elems_ = 0;
@@ -121,12 +117,11 @@ void CircArrayQueue<Elem>::resize_(std::int8_t factor) {
     }
 
     if (new_cap > 0) {
-        auto arr = new Elem[new_cap];
+        auto arr = std::unique_ptr<Elem[]> { new Elem[new_cap] };
         for (std::size_t i { 0 }; i < num_elems_; ++i) {
             arr[i] = elems_[(start_idx_ + i) % capacity_];
         }
-        delete[] elems_;
-        elems_     = arr;
+        elems_     = std::move(arr);
         capacity_  = new_cap;
         start_idx_ = 0;
     }

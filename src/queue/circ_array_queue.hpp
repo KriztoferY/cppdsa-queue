@@ -14,6 +14,7 @@
 
 #include <cstddef>   // size_t
 #include <cstdint>   // uint8_t
+#include <memory>    // unique_ptr<T>
 
 #include "adt.hpp"   // IQueue<Elem, Impl>
 
@@ -66,13 +67,13 @@ public:
      *
      * @return The maximum number.
      */
-    std::size_t     capacity() const noexcept;
+    std::size_t capacity() const noexcept;
 
 private:
-    Elem*       elems_;
-    std::size_t capacity_;
-    std::size_t start_idx_ { 0 };
-    std::size_t num_elems_ { 0 };
+    std::unique_ptr<Elem[]> elems_;
+    std::size_t             capacity_;
+    std::size_t             start_idx_ { 0 };
+    std::size_t             num_elems_ { 0 };
 
     std::size_t end_idx_() const noexcept;
     void        resize_(std::int8_t);
@@ -81,7 +82,7 @@ private:
     std::size_t size_() const noexcept;
 
     /** Determine if this queue has no elements. */
-    bool        empty_() const noexcept;
+    bool empty_() const noexcept;
 
     /**
      * @brief Iterate over all elements of this queue from the front.
@@ -90,7 +91,7 @@ private:
      *
      * @param action The operation to be performed on each element.
      */
-    void        iter_(std::function<void(Elem const&)>) const;
+    void iter_(std::function<void(Elem const&)>) const;
 
     /**
      * @brief Access the element at the front of this queue.
@@ -98,7 +99,7 @@ private:
      * @returns The front element.
      * @throws dsa::EmptyQueueError if the queue is empty.
      */
-    Elem&       front_();
+    Elem& front_();
 
     /**
      * @brief Access (read-only) the element at the front of this queue.
@@ -117,7 +118,7 @@ private:
      * @note Additional memory will be allocated prior to this operation if the
      *      number of elements of this queue exceeds the current capacity.
      */
-    void        enqueue_(Elem const& elem);
+    void enqueue_(Elem const& elem);
 
     /**
      * @brief Add an element to the end of this queue.
@@ -128,7 +129,7 @@ private:
      * @note Additional memory will be allocated prior to this operation if the
      *      number of elements of this queue exceeds the current capacity.
      */
-    void        enqueue_(Elem&& elem);
+    void enqueue_(Elem&& elem);
 
     /**
      * @brief Remove the element at end of this queue.
@@ -138,7 +139,7 @@ private:
      *      re-allocation of half the size) only when the number of elements in
      *      this queue is a quarter of the current capacity.
      */
-    void        dequeue_();
+    void dequeue_();
 
     /**
      * @brief Create a new element in-place after the last element of this
