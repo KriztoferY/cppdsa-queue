@@ -28,7 +28,7 @@ CircArrayQueue<Elem>::CircArrayQueue(CircArrayQueue const& other)
 }
 
 template <typename Elem>
-CircArrayQueue<Elem>::CircArrayQueue(CircArrayQueue&& other)
+CircArrayQueue<Elem>::CircArrayQueue(CircArrayQueue&& other) noexcept
     : elems_ { other.elems_ }, 
       capacity_ { other.capacity_ },
       start_idx_ { other.start_idx_ }, 
@@ -54,7 +54,8 @@ CircArrayQueue<Elem>&
 }
 
 template <typename Elem>
-CircArrayQueue<Elem>& CircArrayQueue<Elem>::operator=(CircArrayQueue&& other) {
+CircArrayQueue<Elem>&
+    CircArrayQueue<Elem>::operator=(CircArrayQueue&& other) noexcept {
     delete[] elems_;
     elems_           = other.elems_;
     capacity_        = other.capacity_;

@@ -53,12 +53,12 @@ public:
     /** Copy-construct a new queue from an existing queue. */
     CircArrayQueue(CircArrayQueue const&);
     /** Move-construct a new queue from an existing queue. */
-    CircArrayQueue(CircArrayQueue&&);
+    CircArrayQueue(CircArrayQueue&&) noexcept;
 
     /** Copy-assign an existing queue to this queue. */
     CircArrayQueue& operator=(CircArrayQueue const&);
     /** Move-assign an existing queue to this queue. */
-    CircArrayQueue& operator=(CircArrayQueue&&);
+    CircArrayQueue& operator=(CircArrayQueue&&) noexcept;
 
     /**
      * @brief Maximum number of elements this queue can store without allocating
