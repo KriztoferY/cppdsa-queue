@@ -160,7 +160,7 @@ private:
     // Prohibit direct instantiation of IQueue
     IQueue();
     Impl<Elem>*       derived_();
-    const Impl<Elem>* derived_() const;
+    Impl<Elem> const* derived_() const;
 };
 
 }   // namespace dsa
