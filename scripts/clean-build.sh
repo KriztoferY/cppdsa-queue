@@ -5,4 +5,4 @@ rm -rf ../bin/*
 rm -rf ../lib/*
 rm -rf ../include/*
 # rm ../include/*.hpp
-printf '\U1F44D Done!\n'
+echo '👍 Done!'
