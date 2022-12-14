@@ -1,44 +1,51 @@
-.. cppdsa-queue documentation master file, created by
-   sphinx-quickstart on Fri Dec  9 22:06:17 2022.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. highlight:: cpp
 
-Welcome to cppdsa-queue's documentation!
-========================================
+The ``cppdsa-queue`` Library
+****************************
 
+``cppdsa-queue`` is a modern C++ library that provides generic implementations 
+of the :ref:`Queue ADT<adt>` and related algorithms. It supports static
+(compile-time) polymorphism and is extensible by means of template programming.
+
+.. code-block:: cpp
+
+   #include <iostream>                 // cout, endl
+   #include "circ_array_queue.hpp"     // CircArrayQueue<Elem>
+
+   int main() {
+      auto q = dsa::CircArrayQueue<int> {};   
+      q.enqueue(3);
+      q.enqueue(1);
+      ...
+      while (!q.empty()) {
+         std::cout << q.front() << ' ';
+         q.dequeue();
+      }
+      std::cout << endl;
+      ...
+      return 0;
+   }
+
+Contents
+========
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
+   intro
+   install
+   references
+   API Index<genindex>
+   license
 
-Indices and tables
-==================
+|
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+Source Code
+===========
 
+Browse the source code on |github_link|. 
 
-The Queue ADT
-=============
+``cppdsa-queue`` is licensed under the :ref:`BSD 3-Clause License<license>`.
 
-.. doxygenclass:: dsa::IQueue
-   :project: cppdsa-queue
-   :members:
+.. |github_link| raw:: html
 
-Exception Classes
-=================
-
-.. doxygenclass:: dsa::EmptyQueueError
-   :project: cppdsa-queue
-   :members:
-
-Circular Array Queue
-====================
-
-.. doxygenclass:: dsa::CircArrayQueue
-   :project: cppdsa-queue
-   :members: 
-   :private-members:
-
-
+   <a href="https://github.com/KriztoferY/cppdsa-queue" target="_blank">Github</a>

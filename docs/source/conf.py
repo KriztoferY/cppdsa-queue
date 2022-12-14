@@ -8,7 +8,7 @@ import sys
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'cppdsa-queue'
-copyright = '2022, KriztoferY'
+copyright = '2022, KriztoferY (https://github.com/KriztoferY)'
 author = 'KriztoferY'
 release = '0.1.0'
 
@@ -26,6 +26,7 @@ exclude_patterns = []
 
 html_theme = 'furo'
 html_static_path = ['_static']
+html_title = 'C++ Queue | cppdsa-queue Library'
 
 # -- Breathe configuration ---------------------------------------------------
 # https://breathe.readthedocs.io/en/latest/quickstart.html
