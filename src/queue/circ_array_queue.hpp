@@ -41,7 +41,7 @@ class CircArrayQueue : public IQueue<Elem, CircArrayQueue>
 
 public:
     /**
-     * @brief Create an empty queue.
+     * @brief Creates an empty queue.
      *
      * @param init_cap The initially anticipated maximum number of elements to
      *      be store in the queue.
@@ -51,14 +51,14 @@ public:
     CircArrayQueue(std::size_t init_cap = 4096);
     ~CircArrayQueue();
 
-    /** Copy-construct a new queue from an existing queue. */
+    /** Copy-constructs a new queue from an existing queue. */
     CircArrayQueue(CircArrayQueue const&);
-    /** Move-construct a new queue from an existing queue. */
+    /** Move-constructs a new queue from an existing queue. */
     CircArrayQueue(CircArrayQueue&&) noexcept;
 
-    /** Copy-assign an existing queue to this queue. */
+    /** Copy-assigns an existing queue to this queue. */
     CircArrayQueue& operator=(CircArrayQueue const&);
-    /** Move-assign an existing queue to this queue. */
+    /** Move-assigns an existing queue to this queue. */
     CircArrayQueue& operator=(CircArrayQueue&&) noexcept;
 
     /**
@@ -81,11 +81,11 @@ private:
     /** Number of elements in the queue. */
     std::size_t size_() const noexcept;
 
-    /** Determine if this queue has no elements. */
+    /** Determines if this queue has no elements. */
     bool empty_() const noexcept;
 
     /**
-     * @brief Iterate over all elements of this queue from the front.
+     * @brief Iterates over all elements of this queue from the front.
      *
      * The given operation will be performed on each element iterated.
      *
@@ -94,7 +94,7 @@ private:
     void iter_(std::function<void(Elem const&)>) const;
 
     /**
-     * @brief Access the element at the front of this queue.
+     * @brief Accesses the element at the front of this queue.
      *
      * @returns The front element.
      * @throws dsa::EmptyQueueError if the queue is empty.
@@ -102,7 +102,7 @@ private:
     Elem& front_();
 
     /**
-     * @brief Access (read-only) the element at the front of this queue.
+     * @brief Accesses (read-only) the element at the front of this queue.
      *
      * @returns The front element (immutable).
      * @throws dsa::EmptyQueueError if the queue is empty.
@@ -110,7 +110,7 @@ private:
     Elem const& front_() const;
 
     /**
-     * @brief Add an element to the end of this queue.
+     * @brief Adds an element to the end of this queue.
      *
      * A deep copy of the element will be copy-constructed and then put into
      * the queue.
@@ -121,7 +121,7 @@ private:
     void enqueue_(Elem const& elem);
 
     /**
-     * @brief Add an element to the end of this queue.
+     * @brief Adds an element to the end of this queue.
      *
      * The element will be put into the queue using move semantics.
      *
@@ -132,7 +132,7 @@ private:
     void enqueue_(Elem&& elem);
 
     /**
-     * @brief Remove the element at end of this queue.
+     * @brief Removes the element at end of this queue.
      *
      * @throws dsa::EmptyQueueError if this queue is empty.
      * @note Removing an element will trigger memory deallocation (and
@@ -142,7 +142,7 @@ private:
     void dequeue_();
 
     /**
-     * @brief Create a new element in-place after the last element of this
+     * @brief Creates a new element in-place after the last element of this
      * queue.
      *
      * The new element is constructed in-place using all of the arguments

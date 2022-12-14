@@ -33,7 +33,7 @@ class EmptyQueueError : public std::exception
 
 public:
     /**
-     * @brief Construct a new Empty Queue Error object.
+     * @brief Constructs a new Empty Queue Error object.
      *
      * @param custom_message A custom message. Defaults to `""`.
      * @note If no custom message is provided, the default error message will
@@ -84,11 +84,11 @@ public:
     /** Number of elements in the queue. */
     std::size_t size() const noexcept;
 
-    /** Determine if this queue has no elements. */
+    /** Determines if this queue has no elements. */
     bool empty() const noexcept;
 
     /**
-     * @brief Iterate over all elements of this queue from the front.
+     * @brief Iterates over all elements of this queue from the front.
      *
      * The given operation will be performed on each element iterated.
      *
@@ -97,7 +97,7 @@ public:
     void iter(std::function<void(Elem const&)> action) const;
 
     /**
-     * @brief Access the element at the front of this queue.
+     * @brief Accesses the element at the front of this queue.
      *
      * @returns The front element.
      * @throws dsa::EmptyQueueError if the queue is empty.
@@ -105,7 +105,7 @@ public:
     Elem& front();
 
     /**
-     * @brief Access (read-only) the element at the front of this queue.
+     * @brief Accesses (read-only) the element at the front of this queue.
      *
      * @returns The front element (immutable).
      * @throws dsa::EmptyQueueError if the queue is empty.
@@ -113,7 +113,7 @@ public:
     Elem const& front() const;
 
     /**
-     * @brief Add an element to the end of this queue.
+     * @brief Adds an element to the end of this queue.
      *
      * A deep copy of the element will be copy-constructed and then put into
      * the queue.
@@ -123,7 +123,7 @@ public:
     void enqueue(Elem const& elem);
 
     /**
-     * @brief Add an element to the end of this queue.
+     * @brief Adds an element to the end of this queue.
      *
      * The element will be put into the queue using move semantics.
      *
@@ -132,14 +132,14 @@ public:
     void enqueue(Elem&& elem);
 
     /**
-     * @brief Remove the element at end of this queue.
+     * @brief Removes the element at end of this queue.
      *
      * @throws dsa::EmptyQueueError if this queue is empty.
      */
     void dequeue();
 
     /**
-     * @brief Create a new element in-place after the last element of this
+     * @brief Creates a new element in-place after the last element of this
      * queue.
      *
      * The new element is constructed in-place using all of the arguments
