@@ -66,9 +66,10 @@ public:
  *      class template using the Curiously Recurring Template Pattern (CRTP).
  *      The inherited class template must implement the private member
  *      functions `_size()`, `_empty()`, `_iter()`, `_front()`, `_enqueue()`,
- *      `_dequeue()`, and `_emplace<...Args>()` for the respective parent class
- *      member functions, including all overloads, unless the client code of
- *      the inherited class template will not require certain operations.
+ *      `_dequeue()`, and `_emplace<...Args>()` to realize the functionalty
+ *      provided by the respective parent class member functions, including all
+ *      overloads, unless the client code of the inherited class template will
+ *      not require certain operations.
  */
 template <typename Elem, template <typename> typename Impl>
 class IQueue
@@ -164,15 +165,14 @@ private:
 };
 
 /**
- * @brief Deallocates memory associated with a queue that was previously
- *      created on the free store using a `new` expression.
+ * @brief Destroys a queue on the free store via a pointer.
  *
  * @tparam Elem The element type.
  * @tparam Impl The derived implementation class.
  * @param queue Pointer to a queue on the free store.
- * @note **IMPORTANT** This is the only proper way to release memory back to
- *      the free store. DO NOT use `delete queue;`, which will lead to memory
- *      leak.
+ * @note **IMPORTANT** This is the only proper way to destroy a queue via a
+ *      base pointer. DO NOT use `delete queue;` in such context, which will
+ *      lead to memory leak.
  */
 template <typename Elem, template <typename> typename Impl>
 void destroy(IQueue<Elem, Impl>* queue);
