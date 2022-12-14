@@ -74,4 +74,11 @@ const Impl<Elem>* IQueue<Elem, Impl>::derived_() const {
     return static_cast<Impl<Elem> const*>(this);
 }
 
+// === FREE FUNCTIONS ====
+
+template <typename Elem, template <typename> typename Impl>
+void destroy(IQueue<Elem, Impl>* queue) {
+    if (queue) delete static_cast<Impl<Elem>*>(queue);
+}
+
 }   // namespace dsa

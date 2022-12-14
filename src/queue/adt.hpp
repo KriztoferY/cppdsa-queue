@@ -79,7 +79,7 @@ class IQueue
 public:
     using elem_type = std::remove_const_t<Elem>;
 
-    virtual ~IQueue();
+    ~IQueue();
 
     /** Number of elements in the queue. */
     std::size_t size() const noexcept;
@@ -162,6 +162,20 @@ private:
     Impl<Elem>*       derived_();
     Impl<Elem> const* derived_() const;
 };
+
+/**
+ * @brief Deallocates memory associated with a queue that was previously
+ *      created on the free store using a `new` expression.
+ *
+ * @tparam Elem The element type.
+ * @tparam Impl The derived implementation class.
+ * @param queue Pointer to a queue on the free store.
+ * @note **IMPORTANT** This is the only proper way to release memory back to
+ *      the free store. DO NOT use `delete queue;`, which will lead to memory
+ *      leak.
+ */
+template <typename Elem, template <typename> typename Impl>
+void destroy(IQueue<Elem, Impl>* queue);
 
 }   // namespace dsa
 
