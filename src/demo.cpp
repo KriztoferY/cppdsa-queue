@@ -52,8 +52,8 @@ int main(int argc, char** argv) {
 
         cout << "q.iter() ::\n";
         std::size_t i { 0 };
-        q.iter([&i](auto const& x) {
-            cout << "q.elems_[" << i << "]: " << x << endl;
+        q.iter([&i](auto const& elm) {
+            cout << "q.elems_[" << i << "]: " << elm << endl;
             ++i;
         });
         cout << endl;

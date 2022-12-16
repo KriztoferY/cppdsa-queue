@@ -93,7 +93,7 @@ TEST(CircArrayQueueTest, EnqueuePeekDeqeueIdiomWorks) {
     // now i = 4 (q.size)
 
     while (!q.empty()) {
-        int num;
+        int num { 0 };
         EXPECT_NO_THROW(num = q.front());
         EXPECT_EQ(num, nums[init_sz - i]);
         EXPECT_GT(q.capacity(), 0);
