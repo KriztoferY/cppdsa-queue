@@ -1,4 +1,4 @@
-# cppdsa-queue
+# cppdsa-queue <!-- omit in toc -->
 
 A modern C++ (header-only) library that provides generic implementations of the Queue ADT and related algorithms.
 
@@ -27,16 +27,21 @@ For more details, visit the [documentation site](https://kriztofery.github.io/cp
 
 Here's what you need to get started.
 
+- [Dependencies](#dependencies)
+- [Building \& Testing the Project](#building--testing-the-project)
+- [For Developers \& Contributors](#for-developers--contributors)
+- [License](#license)
+
 ## Dependencies
 
 To build the project, you will need
 - g++ (version 5+) or equivalent compiler that supports C++17 and above
 - CMake (version 3.15+)
 - Make (or equivalent build tool)
-- Googletest (to be installed as submodule of the project using git)
-- git
+- GoogleTest (to be installed as submodule of the project using git)
+- Git
 
-### Installing googletest
+### Installing googletest <!-- omit in toc -->
 
 ```bash
 $ git submodule add --force https://github.com/google/googletest.git test/lib/googletest
@@ -55,7 +60,7 @@ $ cd /path/to/project/root/scripts
 
 or modify the commands with the right path accordingly.
 
-### Full build
+### Full build <!-- omit in toc -->
 
 To make the first build or a clean build, run either:
 
@@ -86,16 +91,14 @@ If any errors arise during the build process or the test process, otherwise, you
 👎 Oops! Something went wrong.
 $ >
 ```
-
-### Rebuild
+### Rebuild <!-- omit in toc -->
 
 To build the whole project again after making changes to the source code, you may simply run either
 ```bash
 $ ./cmake-rebuild-debug.sh      # debug
 $ ./cmake-rebuild-release.sh    # release
 ```
-
-### Clean
+### Clean <!-- omit in toc -->
 
 Alternatively, if you'd like to have a clean build starting from scratch, you may do so by first running the following before either one of two `*-build-*.sh` scripts.
 
@@ -107,7 +110,7 @@ $ ./clean-build.sh
 
 ## For Developers & Contributors
 
-### Project structure
+### Project structure <!-- omit in toc -->
 
 ```bash
 .
@@ -127,7 +130,7 @@ $ ./clean-build.sh
 ```
 Header and source files for the library and demo program are located in the `src/` subdirectory, whereas those for unit tests are located in the `test/` subdirectory.
 
-### Running tests
+### Running tests <!-- omit in toc -->
 
 Although tests are automated via the bash scripts included, you may also run the included tests independently, which is typically useful for debugging after failing builds.
 
@@ -141,20 +144,19 @@ For debugging a failed build, you may want to add also the `--rerun-failed` flag
 
 To find out all available options, run `ctest -help`.
 
-### Code formatting
+### Code formatting <!-- omit in toc -->
 
 Install `clang-format` and run it with the included `.clang-format` config file at the project root.
 
 If you use an IDE, you're strongly revised to configure it to automatically run `clang-format` on each save.
 
-### Documentation
+### Documentation <!-- omit in toc -->
 
-#### Style
+#### Style <!-- omit in toc -->
 
 All documentation text are written in the Javadoc style `/** ... */` with `@` as command marker. In the so-called "banner" form (typically for classes and functions), include aligned leading asterisks `*` in each sandwiched lines. For text that can fit in a single line not exceeding 80 characters (including the comment delimiting characters), use the inline form, either succeeding a statement or on the line preceding the code block to document.
 
-
-#### Site generation
+#### Site generation <!-- omit in toc -->
 
 To build the documentation site for the project, you will need
 - Doxygen
@@ -169,5 +171,8 @@ Visit the [documentation site](https://kriztofery.github.io/cppdsa-queue) for de
 
 The project is licensed under the [BSD 3-Clause License](https://github.com/KriztoferY/cppdsa-queue/blob/main/LICENSE).
  
+## Acknowledgement <!-- omit in toc -->
+
+This project is bootstrapped using [Cookiecutter](https://cookiecutter.io) with the [cpp-lib-cookiecutter](https://github.com/KriztoferY/cpp-lib-cookiecutter) template by the same author of this project.
 
 Copyright &copy; 2022 [KriztoferY](https://github.com/KriztoferY). All rights reserved.
