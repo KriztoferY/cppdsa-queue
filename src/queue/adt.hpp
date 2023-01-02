@@ -40,18 +40,26 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * @copyright Copyright (c) 2022 KriztoferY. All rights reserved.
  */
 
-#ifndef ADT_HPP_
-#define ADT_HPP_
+#ifndef QUEUE_ADT_HPP
+#define QUEUE_ADT_HPP
 
 #include <cstddef>       // size_t
 #include <functional>    // function<T>
-#include <type_traits>   // remove_const_t<T>
+#include <type_traits>   // remove_const_t<T>, enable_if<T>
 #include <exception>     // exception
-#include <string>        // string
+#include <string>        // string, string_view
+#include <iostream>      // ostream
 
 /** Top-level namespace for all `cppdsa-*` libraries. */
 namespace dsa
 {
+
+// clang-format off
+template <typename T>
+concept Insertable = requires (T t, std::ostream& os) {
+    { operator<<(os, t) } -> std::same_as<std::ostream&>;
+};
+// clang-format on
 
 /**
  * @brief Empty queue error.
@@ -130,6 +138,22 @@ public:
     void iter(std::function<void(Elem const&)> action) const;
 
     /**
+     * @brief Creates a string representation of this queue.
+     *
+     * Elements are presented in the queue order from left to right.
+     *
+     * @tparam cond This operation is available only if the element type `Elem`
+     *      of the queue satisfies the @ref `Insertable` concept.
+     * @param prefix Text to prepend to the output string. Defaults to none.
+     * @param sep Sequence of characters to separate successive elements in
+     *      the output string. Defaults to a single space character.
+     * @return The string representation created.
+     */
+    template <std::enable_if_t<Insertable<Elem>, int> cond = 0>
+    std::string to_string(std::string_view prefix = "",
+                          std::string_view sep    = " ") const;
+
+    /**
      * @brief Accesses the element at the front of this queue.
      *
      * @returns The front element.
@@ -194,6 +218,10 @@ private:
     IQueue();
     Impl<Elem>*       derived_();
     Impl<Elem> const* derived_() const;
+
+    // Default impl of to_string_()
+    template <std::enable_if_t<Insertable<Elem>, int> cond = 0>
+    std::string to_string_(std::string_view prefix, std::string_view sep) const;
 };
 
 /**
@@ -209,8 +237,20 @@ private:
 template <typename Elem, template <typename> typename Impl>
 void destroy(IQueue<Elem, Impl>* queue);
 
+/**
+ * @brief Writes the string representation of this queue to an output stream.
+ *
+ * @tparam Elem Type of each element of the queue.
+ * @tparam Impl The derived implementation class of the Queue ADT.
+ * @param os The output stream to write to.
+ * @param queue The queue of which the string representation is to output.
+ * @return The outstream to write to.
+ */
+template <Insertable Elem, template <typename> typename Impl>
+std::ostream& operator<<(std::ostream& os, IQueue<Elem, Impl> const* queue);
+
 }   // namespace dsa
 
 #include "adt.inl"
 
-#endif /* ADT_HPP_ */
+#endif /* QUEUE_ADT_HPP */

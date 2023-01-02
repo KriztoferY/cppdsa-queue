@@ -33,6 +33,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /*** Inline definitions ***/
 #include "adt.hpp"
 
+#include <sstream>   // stringstream
+
 namespace dsa
 {
 
@@ -56,6 +58,13 @@ bool IQueue<Elem, Impl>::empty() const noexcept {
 template <typename Elem, template <typename> typename Impl>
 void IQueue<Elem, Impl>::iter(std::function<void(Elem const&)> action) const {
     derived_()->iter_(action);
+}
+
+template <typename Elem, template <typename> typename Impl>
+template <std::enable_if_t<Insertable<Elem>, int>>
+std::string IQueue<Elem, Impl>::to_string(std::string_view prefix,
+                                          std::string_view sep) const {
+    return derived_()->to_string_(prefix, sep);
 }
 
 template <typename Elem, template <typename> typename Impl>
@@ -106,11 +115,32 @@ const Impl<Elem>* IQueue<Elem, Impl>::derived_() const {
     return static_cast<Impl<Elem> const*>(this);
 }
 
+template <typename Elem, template <typename> typename Impl>
+template <std::enable_if_t<Insertable<Elem>, int>>
+std::string IQueue<Elem, Impl>::to_string_(std::string_view prefix,
+                                           std::string_view sep) const {
+    std::stringstream ss {};
+    std::size_t       n { this->size() };
+    if (!prefix.empty()) ss << prefix;
+    ss << "[";
+    iter([&n, &ss, &sep](Elem const& elem) {
+        ss << elem;
+        if (--n > 0) ss << sep;
+    });
+    ss << "]";
+    return ss.str();
+}
+
 // === FREE FUNCTIONS ====
 
 template <typename Elem, template <typename> typename Impl>
 void destroy(IQueue<Elem, Impl>* queue) {
     if (queue) delete static_cast<Impl<Elem>*>(queue);
+}
+
+template <Insertable Elem, template <typename> typename Impl>
+std::ostream& operator<<(std::ostream& os, IQueue<Elem, Impl> const* queue) {
+    return os << queue->to_string();
 }
 
 }   // namespace dsa
