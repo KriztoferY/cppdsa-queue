@@ -35,7 +35,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <string>     // stoull()
 #include <numbers>    // numbers
 
-#include "circ_array_queue.hpp"
+#include "circ_array_queue.hpp"   // CircArrayQueue<T>
 #include "ProjectConfig.h"
 
 using namespace std;
@@ -113,9 +113,12 @@ int main(int argc, char** argv) {
 
 // -----------------------------------------------------------------------------
 
+// clang-format off
+
 /* === COMPILE & RUN ===
-g++ demo.cpp -o demo -std=c++20 -g -Og -Wall -pedantic -march=native && ./demo 6
-g++ demo.cpp -o demo -std=c++20 -O3 -march=native -DNDEBUG && ./demo 6
+g++ demo.cpp -o demo -std=c++20 -g -Og -Wall -pedantic -march=native -I./queue && ./demo 6 
+
+g++ demo.cpp -o demo -std=c++20 -O3 -march=native -DNDEBUG -I./queue && ./demo 6
 */
 
 /* === SAMPLE OUTPUT ===
