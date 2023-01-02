@@ -41,8 +41,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * @copyright Copyright (c) 2022 KriztoferY. All rights reserved.
  */
 
-#ifndef CIRC_ARRAY_QUEUE_HPP_
-#define CIRC_ARRAY_QUEUE_HPP_
+#ifndef CIRC_ARRAY_QUEUE_HPP
+#define CIRC_ARRAY_QUEUE_HPP
 
 #include <cstddef>   // size_t
 #include <cstdint>   // uint8_t
@@ -76,7 +76,7 @@ public:
      * @brief Creates an empty queue.
      *
      * @param init_cap The initially anticipated maximum number of elements to
-     *      be store in the queue.
+     *      be stored in the queue.
      * @note Memory will be allocated according to `init_cap` and the element
      *      type `Elem`.
      */
@@ -195,4 +195,4 @@ private:
 
 #include "circ_array_queue.inl"
 
-#endif /* CIRC_ARRAY_QUEUE_HPP_ */
+#endif /* CIRC_ARRAY_QUEUE_HPP */
