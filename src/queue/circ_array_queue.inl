@@ -121,9 +121,10 @@ bool CircArrayQueue<Elem>::empty_() const noexcept {
 }
 
 template <typename Elem>
-void CircArrayQueue<Elem>::iter_(std::function<void(Elem const&)> visit) const {
+void CircArrayQueue<Elem>::iter_(
+    std::function<void(Elem const&)> action) const {
     for (std::size_t i { 0 }; i < num_elems_; ++i) {
-        visit(elems_[(start_idx_ + i) % capacity_]);
+        action(elems_[(start_idx_ + i) % capacity_]);
     }
 }
 

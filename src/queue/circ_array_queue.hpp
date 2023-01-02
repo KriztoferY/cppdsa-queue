@@ -123,7 +123,7 @@ private:
      *
      * @param action The operation to be performed on each element.
      */
-    void iter_(std::function<void(Elem const&)>) const;
+    void iter_(std::function<void(Elem const&)> action) const;
 
     /**
      * @brief Accesses the element at the front of this queue.
