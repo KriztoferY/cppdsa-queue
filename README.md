@@ -2,8 +2,10 @@
 
 A modern C++ (header-only) library that provides generic implementations of the Queue ADT and related algorithms.
 
+Differenet implementations of the Queue ADT are defined in separate header files.
+
 ```cpp
-#include <iostream>                 // cout, endl
+...
 #include "circ_array_queue.hpp"     // CircArrayQueue<Elem>
 
 int main() {
@@ -21,7 +23,37 @@ int main() {
 }
 ```
 
-It supports static (compile-time) polymorphism and is extensible by means of template programming.
+A collection of implementation-agnostic algorithms on the Queue ADT is included in a dedicated header file.
+
+```cpp
+...
+#include "algos.hpp"    // merge<...>()
+...
+using IntQueue = dsa::CircArrayQueue<int>;
+
+dsa::IQueue<int, dsa::CircArrayQueue>* q1 { new IntQueue {} };
+for (int nums[] { 4, 7, 2, 10 }; auto const num : nums) {       // num = priority
+    q1->enqueue(num);
+}
+
+dsa::IQueue<int, dsa::CircArrayQueue>* q2 { new IntQueue {} };
+for (int nums[] { 3, 6, 8, 9, 5, 1 }; auto const num : nums) {  // num = priority
+    q2->enqueue(num);
+}
+
+// larger the element value, higher the priority given when 
+// two queues are stable-merged
+auto* q = dsa::merge<int, dsa::CircArrayQueue, std::greater<int>>(q1, q2);
+std::cout << q->to_string("q", ",") << std::endl;
+// prints "q[4,7,3,6,8,9,5,2,10,1]"
+...
+// manual memory deallocation requires to support 100% static polymorphism
+destroy(q1);
+destroy(q2);
+destroy(q);
+```
+
+It is designed to support **static (compile-time) polymorphism** and is extensible by means of **template programming**.
 
 For more details, visit the [documentation site](https://kriztofery.github.io/cppdsa-queue).
 
@@ -80,7 +112,7 @@ $ >
 In that case, you'll find three (or four) newly created subdirectories under the project root.
 1. `build/[debug|release]/` --- contains all artifacts created during the build process
 2. `include/` --- contains the header files of the library.
-3. `bin/` --- contains the executable demo program `queue_demo`.
+3. `bin/` --- contains the executable demo programs `queue_demo` and `queue_merge_demo`.
 4. `lib/` --- (if applicable) contains the static libraries (`*.a` archive files), which you may copy into your system library folder or your project that depends on it, along with the `include/` folder.
 
 
