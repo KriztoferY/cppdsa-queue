@@ -57,8 +57,11 @@ namespace dsa
 // clang-format off
 template <typename T>
 concept Insertable = requires (T t, std::ostream& os) {
-    { operator<<(os, t) } -> std::same_as<std::ostream&>;
-};
+                         { operator<<(os, t) } -> std::same_as<std::ostream&>;
+                     } || 
+                     requires (T t, std::ostream& os) { 
+                        os << t; 
+                    };
 // clang-format on
 
 /**
@@ -75,7 +78,7 @@ public:
     /**
      * @brief Constructs a new Empty Queue Error object.
      *
-     * @param custom_message A custom message. Defaults to `""`.
+     * @param custom_message A custom message. Defaults to none.
      * @note If no custom message is provided, the default error message will
      *      be used.
      */
@@ -149,7 +152,7 @@ public:
      *      the output string. Defaults to a single space character.
      * @return The string representation created.
      */
-    template <std::enable_if_t<Insertable<Elem>, int> cond = 0>
+    template <Insertable T = Elem>
     std::string to_string(std::string_view prefix = "",
                           std::string_view sep    = " ") const;
 
@@ -220,7 +223,7 @@ private:
     Impl<Elem> const* derived_() const;
 
     // Default impl of to_string_()
-    template <std::enable_if_t<Insertable<Elem>, int> cond = 0>
+    template <Insertable T = Elem>
     std::string to_string_(std::string_view prefix, std::string_view sep) const;
 };
 

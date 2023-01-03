@@ -61,7 +61,7 @@ void IQueue<Elem, Impl>::iter(std::function<void(Elem const&)> action) const {
 }
 
 template <typename Elem, template <typename> typename Impl>
-template <std::enable_if_t<Insertable<Elem>, int>>
+template <Insertable T>
 std::string IQueue<Elem, Impl>::to_string(std::string_view prefix,
                                           std::string_view sep) const {
     return derived_()->to_string_(prefix, sep);
@@ -116,7 +116,7 @@ const Impl<Elem>* IQueue<Elem, Impl>::derived_() const {
 }
 
 template <typename Elem, template <typename> typename Impl>
-template <std::enable_if_t<Insertable<Elem>, int>>
+template <Insertable T>
 std::string IQueue<Elem, Impl>::to_string_(std::string_view prefix,
                                            std::string_view sep) const {
     std::stringstream ss {};
