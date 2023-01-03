@@ -63,7 +63,7 @@ namespace dsa
  * using the Curiously Recurring Template Pattern (CRTP).
  *
  * @tparam Elem The queue element type.
- * @note The queue has value semantics.
+ * @note The queue elements have value semantics.
  */
 template <typename Elem>
 class CircArrayQueue : public IQueue<Elem, CircArrayQueue>

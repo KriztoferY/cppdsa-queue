@@ -55,6 +55,12 @@ namespace dsa
 {
 
 // clang-format off
+/**
+ * @brief Specifies that the type `T` can be operated with the insertion 
+ *      operator `<<` as the right operand to write to an output stream that
+ *      serves as the left operand.
+ * @tparam T The type to test.
+ */
 template <typename T>
 concept Insertable = requires (T t, std::ostream& os) {
                          { operator<<(os, t) } -> std::same_as<std::ostream&>;
@@ -85,6 +91,7 @@ public:
     EmptyQueueError(std::string custom_message = "")
         : msg_ { custom_message } {}
 
+    /** Gets the error message. */
     const char* what() const noexcept override {
         return msg_.empty() ? default_msg : msg_.c_str();
     }
@@ -108,11 +115,13 @@ public:
  * @note All implementations of the queue ADT must statically inherit this
  *      class template using the Curiously Recurring Template Pattern (CRTP).
  *      The inherited class template must implement the private member
- *      functions `_size()`, `_empty()`, `_iter()`, `_front()`, `_enqueue()`,
- *      `_dequeue()`, and `_emplace<...Args>()` to realize the functionalty
+ *      functions `size_()`, `empty_()`, `iter_()`, `front_()`, `enqueue_()`,
+ *      `dequeue_()`, and `emplace_<...Args>()` to realize the functionalty
  *      provided by the respective parent class member functions, including all
  *      overloads, unless the client code of the inherited class template will
- *      not require certain operations.
+ *      not require certain operations. A default implementation for
+ *      `to_string_()` is provided but you may override it to customize the
+ *      string representation for your implementation.
  */
 template <typename Elem, template <typename> typename Impl>
 class IQueue
@@ -121,6 +130,7 @@ class IQueue
     friend class Impl<Elem>;
 
 public:
+    /** Queue element type. */
     using elem_type = std::remove_const_t<Elem>;
 
     ~IQueue();
@@ -145,8 +155,8 @@ public:
      *
      * Elements are presented in the queue order from left to right.
      *
-     * @tparam cond This operation is available only if the element type `Elem`
-     *      of the queue satisfies the @ref `Insertable` concept.
+     * @tparam T(dummy) This operation is available only if the element type
+     *      `Elem` of the queue satisfies the @ref dsa::Insertable concept.
      * @param prefix Text to prepend to the output string. Defaults to none.
      * @param sep Sequence of characters to separate successive elements in
      *      the output string. Defaults to a single space character.
@@ -210,7 +220,7 @@ public:
      * @param args Variable number of arguments to be passed to the constructor
      *      of the element type `Elem`.
      * @note Strictly speaking, this is a convenient member function, and hence
-     *      implementations without `_emplace<...Args>()` is still considered
+     *      implementations without `emplace_<...Args>()` is still considered
      *      complete with respect to the Queue ADT in theory.
      */
     template <typename... Args>

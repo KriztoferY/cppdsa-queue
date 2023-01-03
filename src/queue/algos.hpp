@@ -34,7 +34,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * @file      algos.hpp
  * @brief     Algorithms on the Queue ADT.
  * @author    KriztoferY
- * @version   1.0.0
+ * @version   0.1.0
  * @date      2023.01.02
  * @copyright Copyright (c) 2023 KriztoferY. All rights reserved.
  */
@@ -65,9 +65,9 @@ concept BinaryPredicate = requires (T t, Arg a, Arg b) {
 /**
  * @brief Stable-merges two queues.
  *
- * Elements are compared using the @ref `BinaryPredicate` `compare` to determine
- * the order in which they appear in the merged queue. Relative order of
- * elements in the original queues are preserved. A new queue is created and
+ * Elements are compared using the @ref dsa::BinaryPredicate `compare` to
+ * determine the order in which they appear in the merged queue. Relative order
+ * of elements in the original queues are preserved. A new queue is created and
  * returned if both queues to merge are not empty.
  *
  * @tparam Elem Type of each element in the queue.
@@ -77,13 +77,13 @@ concept BinaryPredicate = requires (T t, Arg a, Arg b) {
  *       merged queue; it has not effect on the relative order of elements in
  *       the original queues. The signature of an equivalent function reads
  *       `bool (Elem const&, Elem const&)`, i.e. it must satisfy the @ref
- *       `BinaryPredicate` concept.
+ *       dsa::BinaryPredicate concept.
  * @param queue1 A queue to merge.
  * @param queue2 Another queue to merge.
  * @return IQueue<Elem, Impl>* The merged queue if both queues to merge are
  *       not empty, one of the queue to merge if the other is empty, `nullptr`
  *       if both are empty. **[IMPORTANT]** In the first case, call @ref
- *       `destroy()` when you're done with the merged queue to free the
+ *       dsa::destroy when you're done with the merged queue to free the
  *       memory allocated to it.
  * @note The complexity of the merge algorithm is `O(n1 + n2)` in both time and
  *      space, where `n1` and `n2` are the sizes of the two queues to merge.
