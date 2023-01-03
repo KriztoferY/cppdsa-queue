@@ -66,7 +66,7 @@ std::ostream& operator<<(std::ostream& os, Job const& job) {
               << ", priority=" << job.priority << ")";
 }
 
-int main(int argc, char** argv) {
+int main() {
     using namespace std;
     using IntQueue = dsa::CircArrayQueue<int>;
     using JobQueue = dsa::CircArrayQueue<Job>;
