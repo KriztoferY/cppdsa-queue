@@ -79,3 +79,6 @@ Thumbs.db
 
 # python virtual environment
 .venv
+
+# scratchpad
+scratch/**/*
