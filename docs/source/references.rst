@@ -7,3 +7,4 @@ API References
 
    references/adt
    references/circ_array_queue
+   references/algos

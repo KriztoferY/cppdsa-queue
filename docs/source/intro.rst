@@ -1,5 +1,3 @@
-.. highlight:: cpp
-
 A Quick Tour
 ************
 
@@ -101,8 +99,9 @@ advised to document the proper usage in your documentation.
 Demo Program
 ------------
 
-Wanna see a queue in action? No problem. Follow the installation instructions 
-to build the project. You'll find a demo program in the ``bin/`` subdirectory.
+Wanna see a queue and the algorithms in action? No problem. Follow the 
+installation instructions to build the project. You'll find a few demo programs 
+in the ``bin/`` subdirectory.
 
 |
 

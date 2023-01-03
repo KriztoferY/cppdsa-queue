@@ -38,10 +38,27 @@ Abstract Data Type (ADT)
 Supporting Function
 ===================
 
-NOTE: Client code that does not adopt static polymorphism will never need to 
-call this function.
-
 .. doxygenfunction:: dsa::destroy
+   :project: cppdsa-queue
+
+NOTE: Client code that does not adopt static polymorphism will never need to 
+call the `destroy()` function.
+
+|
+
+.. doxygenfunction:: dsa::operator<<
+   :project: cppdsa-queue
+
+|
+
+Concepts
+========
+
+To make the member function ``dsa::IQueue::to_string()`` available, the 
+element type ``Elem`` must satisfy the ``dsa::Insertable`` constraint, so that 
+the insertion operator ``<<`` can be operated on the queue elements.
+
+.. doxygenconcept:: dsa::Insertable
    :project: cppdsa-queue
 
 |

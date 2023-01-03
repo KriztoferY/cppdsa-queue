@@ -1,15 +1,14 @@
-.. highlight:: cpp
-
 The ``cppdsa-queue`` Library
 ****************************
 
 ``cppdsa-queue`` is a modern C++ library that provides generic implementations 
-of the :ref:`Queue ADT<adt>` and related algorithms. It supports static
-(compile-time) polymorphism and is extensible by means of template programming.
+of the :ref:`Queue ADT<adt>` and related :ref:`algorithms<algos>`. It supports 
+**static (compile-time) polymorphism** and is extensible by means of **template 
+programming**.
 
 .. code-block:: cpp
 
-   #include <iostream>                 // cout, endl
+   ...
    #include "circ_array_queue.hpp"     // CircArrayQueue<Elem>
 
    int main() {
