@@ -2,7 +2,7 @@
 
 A modern C++ (header-only) library that provides generic implementations of the Queue ADT and related algorithms.
 
-Differenet implementations of the Queue ADT are defined in separate header files.
+Different implementations of the Queue ADT are defined in separate header files.
 
 ```cpp
 ...
@@ -67,7 +67,7 @@ Here's what you need to get started.
 ## Dependencies
 
 To build the project, you will need
-- g++ (version 5+) or equivalent compiler that supports C++17 and above
+- g++ (version 8+) or equivalent compiler that supports C++20 and above
 - CMake (version 3.15+)
 - Make (or equivalent build tool)
 - GoogleTest (to be installed as submodule of the project using git)
@@ -106,14 +106,13 @@ On success, you'll see the success message at the end of the build and test proc
 ```bash
 ...         # build/test info...
 👍 Congrats! You are all set.
-$ >
+$
 ```
 
-In that case, you'll find three (or four) newly created subdirectories under the project root.
+In that case, you'll find three newly created subdirectories under the project root.
 1. `build/[debug|release]/` --- contains all artifacts created during the build process
 2. `include/` --- contains the header files of the library.
 3. `bin/` --- contains the executable demo programs `queue_demo` and `queue_merge_demo`.
-4. `lib/` --- (if applicable) contains the static libraries (`*.a` archive files), which you may copy into your system library folder or your project that depends on it, along with the `include/` folder.
 
 
 If any errors arise during the build process or the test process, otherwise, you'll get the error message at the end like so:
@@ -121,7 +120,7 @@ If any errors arise during the build process or the test process, otherwise, you
 ```bash
 ...         # build/test info...
 👎 Oops! Something went wrong.
-$ >
+$
 ```
 ### Rebuild <!-- omit in toc -->
 
@@ -138,7 +137,7 @@ Alternatively, if you'd like to have a clean build starting from scratch, you ma
 $ ./clean-build.sh
 ```
 
-⚠️ **WARNING** : It permanently removes all three/four subdirectories created during a build process. So use it with caution if you choose to save any other files at those locations.
+⚠️ **WARNING** : It permanently removes all three subdirectories created during a build process. So use it with caution if you choose to save any other files at those locations.
 
 ## For Developers & Contributors
 
@@ -153,7 +152,6 @@ $ ./clean-build.sh
 ├── build/                  # to be created in the first build
 ├── bin/                    # to be created in the first build
 ├── include/                # to be created in the first build
-├── lib/                    # to be created in the first build
 ├── ProjectConfig.h.in 
 ├── CMakeLists.txt
 ├── Doxyfile
@@ -191,13 +189,11 @@ All documentation text are written in the Javadoc style `/** ... */` with `@` as
 #### Site generation <!-- omit in toc -->
 
 To build the documentation site for the project, you will need
-- Doxygen
+- Doxygen 1.9.2+
 - Python 3.7+
 - Sphinx
 - Furo
 - Breathe
-
-Visit the [documentation site](https://kriztofery.github.io/cppdsa-queue) for details.
 
 ## License
 
