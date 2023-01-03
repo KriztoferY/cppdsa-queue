@@ -45,11 +45,13 @@ void print_usage(const string& executable) {
               << CppdsaQueue_VERSION_MINOR << "." << CppdsaQueue_VERSION_PATCH
               << std::endl;
     std::cout << "USAGE: " << executable << " <num_elems>" << std::endl;
-    exit(EXIT_FAILURE);
 }
 
 int main(int argc, char** argv) {
-    if (argc != 2) print_usage(argv[0]);
+    if (argc != 2) {
+        print_usage(argv[0]);
+        return EXIT_FAILURE;
+    }
 
     try {
         auto num_elems = std::stoull(argv[1]);
