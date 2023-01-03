@@ -48,3 +48,49 @@ Browse the source code on |github_link|.
 .. |github_link| raw:: html
 
    <a href="https://github.com/KriztoferY/cppdsa-queue" target="_blank">Github</a>
+
+|
+
+Also Want It In Another Language?
+=================================
+
+* C : |c_repo| | |c_docs|
+
+* Go : |go_repo| | |go_docs| [coming soon]
+
+* Python : |py_repo| | |py_docs|
+
+* TypeScript : |ts_repo| | |ts_docs|
+
+.. |c_repo| raw:: html
+
+   <a href="https://github.com/KriztoferY/cdsa-queue" target="_blank">Repository</a>
+
+.. |c_docs| raw:: html
+
+   <a href="https://KriztoferY.github.io/cdsa-queue" target="_blank">Documentation</a>
+
+.. |go_repo| raw:: html
+
+   <a href="https://github.com/KriztoferY/godsa-queue" target="_blank">Repository</a>
+
+.. |go_docs| raw:: html
+
+   <a href="https://KriztoferY.github.io/godsa-queue" target="_blank">Documentation</a>
+
+.. |py_repo| raw:: html
+
+   <a href="https://github.com/KriztoferY/pydsa-queue" target="_blank">Repository</a>
+
+.. |py_docs| raw:: html
+
+   <a href="https://KriztoferY.github.io/pydsa-queue" target="_blank">Documentation</a>
+
+.. |ts_repo| raw:: html
+
+   <a href="https://github.com/KriztoferY/tsdsa-queue" target="_blank">Repository</a>
+
+.. |ts_docs| raw:: html
+
+   <a href="https://KriztoferY.github.io/tsdsa-queue" target="_blank">Documentation</a>
+     

@@ -63,6 +63,7 @@ Here's what you need to get started.
 - [Building \& Testing the Project](#building--testing-the-project)
 - [For Developers \& Contributors](#for-developers--contributors)
 - [License](#license)
+- [Also Want It In Another Language?](#also-want-it-in-another-language)
 
 ## Dependencies
 
@@ -198,7 +199,14 @@ To build the documentation site for the project, you will need
 ## License
 
 The project is licensed under the [BSD 3-Clause License](https://github.com/KriztoferY/cppdsa-queue/blob/main/LICENSE).
- 
+
+## Also Want It In Another Language?
+
+- C : [Repository](https://github.com/KriztoferY/cdsa-queue) | [Documentation](https://KriztoferY.github.io/cdsa-queue)
+- Go : [Repository](https://github.com/KriztoferY/godsa-queue) | [Documentation](https://KriztoferY.github.io/godsa-queue) [coming soon]
+- Python : [Repository](https://github.com/KriztoferY/pydsa-queue) | [Documentation](https://KriztoferY.github.io/pydsa-queue)
+- TypeScript : [Repository](https://github.com/KriztoferY/tsdsa-queue) | [Documentation](https://KriztoferY.github.io/tsdsa-queue)
+
 ## Acknowledgement <!-- omit in toc -->
 
 This project is bootstrapped using [Cookiecutter](https://cookiecutter.io) with the [cpp-lib-cookiecutter](https://github.com/KriztoferY/cpp-lib-cookiecutter) template by the same author of this project.
