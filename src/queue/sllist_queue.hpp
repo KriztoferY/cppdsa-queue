@@ -52,8 +52,18 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 namespace dsa
 {
 
-// -----------------------------------------------------------------------------
-
+/**
+ * @brief Singly linked list queue.
+ *
+ * An unbounded, generic queue type that implements the Queue ADT
+ * `dsa::IQueue` using a singly, circularly linked list with a dummy
+ * header node. This class template statically inherits the Queue ADT template
+ * class using the Curiously Recurring Template Pattern (CRTP). The
+ * instantiated class type is both copyable and movable.
+ *
+ * @tparam Elem The queue element type.
+ * @note The queue elements have value semantics.
+ */
 template <typename Elem>
 class SLListQueue : public IQueue<Elem, SLListQueue>
 {
@@ -123,7 +133,7 @@ private:
      * the queue.
      *
      * @param elem The element to be added.
-     * @throws `std::bad_alloc` or any exception thrown by the constuctor of
+     * @throws std::bad_alloc or any exception thrown by the constuctor of
      *      type `Elem`.
      */
     void enqueue_(Elem const& elem);
@@ -134,7 +144,7 @@ private:
      * The element will be put into the queue using move semantics.
      *
      * @param elem The element to be added.
-     * @throws `std::bad_alloc` or any exception thrown by the constuctor
+     * @throws std::bad_alloc or any exception thrown by the constuctor
      * of type `Elem`.
      */
     void enqueue_(Elem&& elem);
@@ -143,9 +153,6 @@ private:
      * @brief Removes the element at end of this queue.
      *
      * @throws dsa::EmptyQueueError if this queue is empty.
-     * @note Removing an element will trigger memory deallocation (and
-     *      re-allocation of half the size) only when the number of elements in
-     *      this queue is a quarter of the current capacity.
      */
     void dequeue_();
 
@@ -160,7 +167,7 @@ private:
      *      the element type `Elem`.
      * @param args Variable number of arguments to be passed to the constructor
      *      of the element type `Elem`.
-     * @throws `std::bad_alloc` or any exception thrown by the constuctor of
+     * @throws std::bad_alloc or any exception thrown by the constuctor of
      *      type `Elem`.
      */
     template <typename... Args>
