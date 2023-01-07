@@ -2,6 +2,12 @@
 
 A modern C++ (header-only) library that provides generic implementations of the Queue ADT and related algorithms.
 
+Two implementations of the Queue ADT are included in the project off the shelf:
+
+* `dsa::CircArrayQueue` : Circular array based implementation
+
+* `dsa::SLListQueue` : Singly linked list based implementation
+
 Different implementations of the Queue ADT are defined in separate header files.
 
 ```cpp
