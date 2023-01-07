@@ -216,4 +216,4 @@ capabilities.
 
 This project is bootstrapped using <a href="https://cookiecutter.io" target="_blank">Cookiecutter</a> with the <a href="https://github.com/KriztoferY/cpp-lib-cookiecutter" target="_blank">cpp-lib-cookiecutter</a> template (built by the same author of this project).
 
-Copyright &copy; 2022 -2023 <a href="https://github.com/KriztoferY" target="_blank">KriztoferY</a>. All rights reserved.
+Copyright &copy; 2022 - 2023 <a href="https://github.com/KriztoferY" target="_blank">KriztoferY</a>. All rights reserved.
