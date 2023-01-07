@@ -151,7 +151,7 @@ private:
      * the queue.
 
      * @param elem The element to be added.
-     * @throws `std::bad_alloc` or any exception thrown by the constuctor of
+     * @throws std::bad_alloc or any exception thrown by the constuctor of
      *      type `Elem`.
      * @note Additional memory will be allocated prior to this operation if the
      *      number of elements of this queue exceeds the current capacity.
@@ -164,7 +164,7 @@ private:
      * The element will be put into the queue using move semantics.
      *
      * @param elem The element to be added.
-     * @throws `std::bad_alloc` or any exception thrown by the constuctor
+     * @throws std::bad_alloc or any exception thrown by the constuctor
      * of type `Elem`.
      * @note Additional memory will be allocated prior to this operation if the
      *      number of elements of this queue exceeds the current capacity.
@@ -192,7 +192,7 @@ private:
      *      the element type `Elem`.
      * @param args Variable number of arguments to be passed to the constructor
      *      of the element type `Elem`.
-     * @throws `std::bad_alloc` or any exception thrown by the constuctor of
+     * @throws std::bad_alloc or any exception thrown by the constuctor of
      *      type `Elem`.
      * @note Additional memory will be allocated prior to this operation if the
      *      number of elements of this queue exceeds the current capacity.
