@@ -23,7 +23,7 @@ int main() {
 }
 ```
 
-A collection of implementation-agnostic algorithms on the Queue ADT is included in a dedicated header file.
+A collection of ADT-implementation-agnostic algorithms on the Queue ADT is included in a dedicated header file.
 
 ```cpp
 ...
@@ -55,7 +55,7 @@ destroy(q);
 
 It is designed to support **static (compile-time) polymorphism** and is extensible by means of **template programming**.
 
-For more details, visit the [documentation site](https://kriztofery.github.io/cppdsa-queue).
+For more details, visit the <a href="https://KriztoferY.github.io/cppdsa-queue" target="_blank">documentation site</a>.
 
 Here's what you need to get started.
 
@@ -154,6 +154,8 @@ $ ./clean-build.sh
 ├── bin/                    # to be created in the first build
 ├── include/                # to be created in the first build
 ├── ProjectConfig.h.in 
+├── .clang-format
+├── .gitignore
 ├── CMakeLists.txt
 ├── Doxyfile
 ├── LICENSE
@@ -185,7 +187,7 @@ If you use an IDE, you're strongly revised to configure it to automatically run 
 
 #### Style <!-- omit in toc -->
 
-All documentation text are written in the Javadoc style `/** ... */` with `@` as command marker. In the so-called "banner" form (typically for classes and functions), include aligned leading asterisks `*` in each sandwiched lines. For text that can fit in a single line not exceeding 80 characters (including the comment delimiting characters), use the inline form, either succeeding a statement or on the line preceding the code block to document.
+All documentation text are written in the Javadoc style `/** ... */` with `@` as command marker. In multiline form (typically for classes and functions), include aligned leading asterisks `*` in each sandwiched lines. For text that can fit in a single line not exceeding 80 characters (including the comment delimiting characters), use the inline form, either succeeding a statement or on the line preceding the code block to document.
 
 #### Site generation <!-- omit in toc -->
 
@@ -198,17 +200,20 @@ To build the documentation site for the project, you will need
 
 ## License
 
-The project is licensed under the [BSD 3-Clause License](https://github.com/KriztoferY/cppdsa-queue/blob/main/LICENSE).
+The project is licensed under the <a href="https://github.com/KriztoferY/cppdsa-queue/blob/main/LICENSE" target="_blank">BSD 3-Clause License</a>.
 
 ## Also Want It In Another Language?
 
-- C : [Repository](https://github.com/KriztoferY/cdsa-queue) | [Documentation](https://KriztoferY.github.io/cdsa-queue)
-- Go : [Repository](https://github.com/KriztoferY/godsa-queue) | [Documentation](https://KriztoferY.github.io/godsa-queue) [coming soon]
-- Python : [Repository](https://github.com/KriztoferY/pydsa-queue) | [Documentation](https://KriztoferY.github.io/pydsa-queue)
-- TypeScript : [Repository](https://github.com/KriztoferY/tsdsa-queue) | [Documentation](https://KriztoferY.github.io/tsdsa-queue)
+- C : <a href="https://github.com/KriztoferY/cdsa-queue" target="_blank">Repository</a> | <a href="https://KriztoferY.github.io/cdsa-queue" target="_blank">Documentation</a>
+- Go : <a href="https://github.com/KriztoferY/godsa-queue" target="_blank">Repository</a> | <a href="https://KriztoferY.github.io/godsa-queue" target="_blank">Documentation</a> [coming soon]
+- Python : <a href="https://github.com/KriztoferY/pydsa-queue" target="_blank">Repository</a> | <a href="https://KriztoferY.github.io/pydsa-queue" target="_blank">Documentation</a>
+- TypeScript : <a href="https://github.com/KriztoferY/tsdsa-queue" target="_blank">Repository</a> | <a href="https://KriztoferY.github.io/tsdsa-queue" target="_blank">Documentation</a>
+
+The C language equivalent -- <a href="https://github.com/KriztoferY/cdsa-queue" target="_blank">`cdsa-queue`</a> -- is basically the procedural programming version of `cppdsa-queue` but without the compile-time polymorphism
+capabilities.
 
 ## Acknowledgement <!-- omit in toc -->
 
-This project is bootstrapped using [Cookiecutter](https://cookiecutter.io) with the [cpp-lib-cookiecutter](https://github.com/KriztoferY/cpp-lib-cookiecutter) template by the same author of this project.
+This project is bootstrapped using <a href="https://cookiecutter.io" target="_blank">Cookiecutter</a> with the <a href="https://github.com/KriztoferY/cpp-lib-cookiecutter" target="_blank">cpp-lib-cookiecutter</a> template (built by the same author of this project).
 
-Copyright &copy; 2022 [KriztoferY](https://github.com/KriztoferY). All rights reserved.
+Copyright &copy; 2022 -2023 <a href="https://github.com/KriztoferY" target="_blank">KriztoferY</a>. All rights reserved.
