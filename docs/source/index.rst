@@ -43,7 +43,8 @@ Source Code
 
 Browse the source code on |github_link|. 
 
-``cppdsa-queue`` is licensed under the :ref:`BSD 3-Clause License<license>`.
+The ``cppdsa-queue`` project is licensed under the 
+:ref:`BSD 3-Clause License<license>`.
 
 .. |github_link| raw:: html
 

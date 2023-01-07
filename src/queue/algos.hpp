@@ -65,7 +65,7 @@ concept BinaryPredicate = requires (T t, Arg a, Arg b) {
 /**
  * @brief Stable-merges two queues.
  *
- * Elements are compared using the @ref dsa::BinaryPredicate `compare` to
+ * Elements are compared using the `dsa::BinaryPredicate` `compare` to
  * determine the order in which they appear in the merged queue. Relative order
  * of elements in the original queues are preserved. A new queue is created and
  * returned if both queues to merge are not empty.
@@ -76,13 +76,13 @@ concept BinaryPredicate = requires (T t, Arg a, Arg b) {
  * @tparam compare A callable object that determines the element order in the
  *       merged queue; it has not effect on the relative order of elements in
  *       the original queues. The signature of an equivalent function reads
- *       `bool (Elem const&, Elem const&)`, i.e. it must satisfy the @ref
- *       dsa::BinaryPredicate concept.
+ *       `bool (Elem const&, Elem const&)`, i.e. it must satisfy the
+ *       `dsa::BinaryPredicate` concept.
  * @param queue1 A queue to merge.
  * @param queue2 Another queue to merge.
  * @return The merged queue if both queues to merge are not empty, one of the
  *       queues to merge if the other is empty, `nullptr` if both are empty.
- *       **[IMPORTANT]** In the first case, call @ref dsa::destroy when you're
+ *       **[IMPORTANT]** In the first case, call `dsa::destroy` when you're
  *       done with the merged queue to free the memory allocated to it.
  * @note The complexity of the merge algorithm is `O(n1 + n2)` in both time and
  *      space, where `n1` and `n2` are the sizes of the two queues to merge.

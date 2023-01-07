@@ -56,15 +56,13 @@ On success, you'll see the success message at the end of the build and test proc
     👍 Congrats! You are all set.
     $
 
-In that case, you'll find three (or four) newly created subdirectories under the project root.
+In that case, you'll find three newly created subdirectories under the project root.
 
 #. ``build/[debug|release]/`` --- contains all artifacts created during the build process
 
 #. ``include/`` --- contains the header files of the library.
 
 #. ``bin/`` --- contains the executable demo programs ``queue_demo`` and ``queue_merge_demo``.
-
-#. ``lib/`` --- (if applicable) contains the static libraries (``*.a`` archive files), which you may copy into your system library folder or your project that depends on it, along with the ``include/`` folder.
 
 If any errors arise during the build process or the test process, otherwise, you'll get the error message at the end like so:
 
