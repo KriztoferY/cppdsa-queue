@@ -80,11 +80,10 @@ concept BinaryPredicate = requires (T t, Arg a, Arg b) {
  *       dsa::BinaryPredicate concept.
  * @param queue1 A queue to merge.
  * @param queue2 Another queue to merge.
- * @return IQueue<Elem, Impl>* The merged queue if both queues to merge are
- *       not empty, one of the queue to merge if the other is empty, `nullptr`
- *       if both are empty. **[IMPORTANT]** In the first case, call @ref
- *       dsa::destroy when you're done with the merged queue to free the
- *       memory allocated to it.
+ * @return The merged queue if both queues to merge are not empty, one of the
+ *       queues to merge if the other is empty, `nullptr` if both are empty.
+ *       **[IMPORTANT]** In the first case, call @ref dsa::destroy when you're
+ *       done with the merged queue to free the memory allocated to it.
  * @note The complexity of the merge algorithm is `O(n1 + n2)` in both time and
  *      space, where `n1` and `n2` are the sizes of the two queues to merge.
  */
