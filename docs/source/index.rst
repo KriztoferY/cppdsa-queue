@@ -25,6 +25,13 @@ programming**.
       return 0;
    }
 
+Two implementations of the Queue ADT are included in the project off the shelf:
+
+* :ref:`dsa::CircArrayQueue<circ_array_queue>` : Circular array based implementation
+
+* :ref:`dsa::SLListQueue<linked_list_queue>` : Singly linked list based implementation
+
+
 Contents
 ========
 .. toctree::
@@ -95,3 +102,9 @@ Also Want It In Another Language?
 
    <a href="https://KriztoferY.github.io/tsdsa-queue" target="_blank">Documentation</a>
      
+The C language equivalent -- |c_eqv| -- is basically the procedural programming version of ``cppdsa-queue`` but without the compile-time polymorphism
+capabilities.
+
+.. |c_eqv| raw:: html
+
+   <tt><a href="https://github.com/KriztoferY/cdsa-queue" target="_blank">cdsa-queue</a></tt>
