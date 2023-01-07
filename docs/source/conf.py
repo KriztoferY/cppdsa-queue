@@ -8,7 +8,7 @@ import sys
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'cppdsa-queue'
-copyright = '2022, KriztoferY (https://github.com/KriztoferY)'
+copyright = '2022 - 2023, KriztoferY (https://github.com/KriztoferY)'
 author = 'KriztoferY'
 release = '0.1.0'
 
