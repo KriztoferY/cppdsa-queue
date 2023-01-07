@@ -107,8 +107,11 @@ private:
     std::size_t             start_idx_ { 0 };
     std::size_t             num_elems_ { 0 };
 
+    // Gets the array position of the last element in this queue.
     std::size_t end_idx_() const noexcept;
-    void        resize_(std::int8_t);
+    // Grows (factor > 0) or shrinks (factor <= 0) the underlying array.
+    // Take 1 to grow, -1 to shrink by convention.
+    void        resize_(std::int8_t factor);
 
     /** Number of elements in the queue. */
     std::size_t size_() const noexcept;
@@ -146,7 +149,10 @@ private:
      *
      * A deep copy of the element will be copy-constructed and then put into
      * the queue.
-     *
+
+     * @param elem The element to be added.
+     * @throws `std::bad_alloc` or any exception thrown by the constuctor of
+     *      type `Elem`.
      * @note Additional memory will be allocated prior to this operation if the
      *      number of elements of this queue exceeds the current capacity.
      */
@@ -158,6 +164,8 @@ private:
      * The element will be put into the queue using move semantics.
      *
      * @param elem The element to be added.
+     * @throws `std::bad_alloc` or any exception thrown by the constuctor
+     * of type `Elem`.
      * @note Additional memory will be allocated prior to this operation if the
      *      number of elements of this queue exceeds the current capacity.
      */
@@ -184,6 +192,8 @@ private:
      *      the element type `Elem`.
      * @param args Variable number of arguments to be passed to the constructor
      *      of the element type `Elem`.
+     * @throws `std::bad_alloc` or any exception thrown by the constuctor of
+     *      type `Elem`.
      * @note Additional memory will be allocated prior to this operation if the
      *      number of elements of this queue exceeds the current capacity.
      */
