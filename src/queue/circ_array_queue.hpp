@@ -57,7 +57,7 @@ namespace dsa
 /**
  * @brief Circular array queue.
  *
- * An unbounded, generic queue that implements the Queue ADT
+ * An unbounded, generic queue type that implements the Queue ADT
  * `dsa::IQueue<Elem>` using a circular array along with a dynamic resizing
  * scheme. This class template statically inherits the Queue ADT template class
  * using the Curiously Recurring Template Pattern (CRTP).
