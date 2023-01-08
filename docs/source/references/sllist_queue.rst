@@ -1,4 +1,4 @@
-.. _linked_list_queue:
+.. _sllist_queue:
 
 Singly Linked List Queue
 ************************

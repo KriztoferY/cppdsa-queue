@@ -29,7 +29,7 @@ Two implementations of the Queue ADT are included in the project off the shelf:
 
 * :ref:`dsa::CircArrayQueue<circ_array_queue>` : Circular array based implementation
 
-* :ref:`dsa::SLListQueue<linked_list_queue>` : Singly linked list based implementation
+* :ref:`dsa::SLListQueue<sllist_queue>` : Singly linked list based implementation
 
 
 Contents
