@@ -91,7 +91,7 @@ int main() {
         cout << q2->to_string("q2", ",") << endl << endl;
 
         // The larger the element value, the higher the priority is given to
-        // an element when the two queues are stable-merged.
+        // the element when the two queues are stable-merged.
         auto* q =
             dsa::merge<int, dsa::CircArrayQueue, std::greater<int>>(q1, q2);
 
