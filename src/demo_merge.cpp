@@ -143,7 +143,7 @@ int main() {
 // clang-format off
 
 /* === COMPILE & RUN ===
-g++ demo_merge.cpp -o demo_merge -std=c++20 -g -Og -Wall -pedantic -march=native -fconcept-diagnostics-depth=2 -I./queue && ./demo_merge
+g++ demo_merge.cpp -o demo_merge -std=c++20 -g -Og -Wall -pedantic -march=native -fconcepts-diagnostics-depth=2 -I./queue && ./demo_merge
 
 g++ demo_merge.cpp -o demo_merge -std=c++20 -O3 -march=native -DNDEBUG -I./queue && ./demo_merge
 */
