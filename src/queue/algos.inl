@@ -68,4 +68,21 @@ IQueue<Elem, Impl>* merge(IQueue<Elem, Impl>* queue1,
     return merged;
 }
 
+template <typename Elem, template <typename> typename Impl,
+          BinaryPredicate<Elem> compare>
+IQueue<Elem, Impl>* merge(IQueue<Elem, Impl> const* queue1,
+                          IQueue<Elem, Impl> const* queue2) {
+
+    if (!queue1 || !queue2) return nullptr;
+    if (queue1->empty()) return const_cast<IQueue<Elem, Impl>*>(queue2);
+    if (queue2->empty()) return const_cast<IQueue<Elem, Impl>*>(queue1);
+
+    IQueue<Elem, Impl>* clone1 { new Impl<Elem> {
+        *static_cast<Impl<Elem> const*>(queue1) } };
+    IQueue<Elem, Impl>* clone2 { new Impl<Elem> {
+        *static_cast<Impl<Elem> const*>(queue2) } };
+
+    return merge<Elem, Impl, compare>(clone1, clone2);
+}
+
 }   // namespace dsa

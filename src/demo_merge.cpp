@@ -74,6 +74,8 @@ int main() {
     try {
         /* --- PART I --- */
 
+        cout << "Creating q1 and q2...\n" << endl;
+
         // Element values imply priorities
         dsa::IQueue<int, dsa::CircArrayQueue>* q1 { new IntQueue {} };
         for (int nums[] { 4, 7, 2, 10 }; auto const num : nums) {
@@ -90,19 +92,35 @@ int main() {
 
         cout << q2->to_string("q2", ",") << endl << endl;
 
+        cout << "Merging q1 and q2..." << endl;
+
         // The larger the element value, the higher the priority is given to
         // the element when the two queues are stable-merged.
         auto* q =
-            dsa::merge<int, dsa::CircArrayQueue, std::greater<int>>(q1, q2);
+            // dsa::merge<int, dsa::CircArrayQueue, std::greater<int>>(q1, q2);
+            dsa::merge<int, dsa::CircArrayQueue, std::greater<int>>(
+                const_cast<dsa::IQueue<int, dsa::CircArrayQueue> const*>(q1),
+                const_cast<dsa::IQueue<int, dsa::CircArrayQueue> const*>(q2));
 
-        cout << "Merging q1 and q2..." << endl;
+        cout << "(using non-modifying overload)\n" << endl;
         cout << q->to_string("q", ",") << endl << endl;
+        cout << q1->to_string("q1", ",") << endl << endl;
+        cout << q2->to_string("q2", ",") << endl << endl;
+
+        q = dsa::merge<int, dsa::CircArrayQueue, std::greater<int>>(q1, q2);
+
+        cout << "(using modifying overload)\n" << endl;
+        cout << q->to_string("q", ",") << endl << endl;
+        cout << q1->to_string("q1", ",") << endl << endl;
+        cout << q2->to_string("q2", ",") << endl << endl;
 
         destroy(q1);
         destroy(q2);
         destroy(q);
 
         /* --- PART II --- */
+
+        cout << "Creating jq1 and jq2...\n" << endl;
 
         dsa::IQueue<Job, dsa::CircArrayQueue>* jq1 { new JobQueue {} };
 
@@ -121,11 +139,24 @@ int main() {
 
         cout << jq2->to_string("jq2", "\n") << endl << endl;
 
-        auto* jq = dsa::merge<Job, dsa::CircArrayQueue, decltype(compare_jobs)>(
-            jq1, jq2);
-
         cout << "Merging jq1 and jq2..." << endl;
+
+        auto* jq = dsa::merge<Job, dsa::CircArrayQueue, decltype(compare_jobs)>(
+            const_cast<dsa::IQueue<Job, dsa::CircArrayQueue> const*>(jq1),
+            const_cast<dsa::IQueue<Job, dsa::CircArrayQueue> const*>(jq2));
+
+        cout << "(using non-modifying overload)\n" << endl;
         cout << jq->to_string("jq", "\n") << endl << endl;
+        cout << jq1->to_string("jq1", "\n") << endl << endl;
+        cout << jq2->to_string("jq2", "\n") << endl << endl;
+
+        jq = dsa::merge<Job, dsa::CircArrayQueue, decltype(compare_jobs)>(jq1,
+                                                                          jq2);
+
+        cout << "(using modifying overload)\n" << endl;
+        cout << jq->to_string("jq", "\n") << endl << endl;
+        cout << jq1->to_string("jq1", "\n") << endl << endl;
+        cout << jq2->to_string("jq2", "\n") << endl << endl;
 
         destroy(jq1);
         destroy(jq2);
@@ -143,18 +174,36 @@ int main() {
 // clang-format off
 
 /* === COMPILE & RUN ===
-g++ demo_merge.cpp -o demo_merge -std=c++20 -g -Og -Wall -pedantic -march=native -fconcepts-diagnostics-depth=2 -I./queue && ./demo_merge
+clear && g++ demo_merge.cpp -o demo_merge -std=c++20 -g -Og -Wall -pedantic -march=native -fconcepts-diagnostics-depth=2 -I./queue && ./demo_merge
 
-g++ demo_merge.cpp -o demo_merge -std=c++20 -O3 -march=native -DNDEBUG -I./queue && ./demo_merge
+clear && g++ demo_merge.cpp -o demo_merge -std=c++20 -O3 -march=native -DNDEBUG -I./queue && ./demo_merge
 */
 
 /* === OUTPUT ===
+Creating q1 and q2...
+
 q1[4,7,2,10]
 
 q2[3,6,8,9,5,1]
 
 Merging q1 and q2...
+(using non-modifying overload)
+
 q[4,7,3,6,8,9,5,2,10,1]
+
+q1[4,7,2,10]
+
+q2[3,6,8,9,5,1]
+
+(using modifying overload)
+
+q[4,7,3,6,8,9,5,2,10,1]
+
+q1[]
+
+q2[]
+
+Creating jq1 and jq2...
 
 jq1[Job(name=M, time_id=2, priority=1)
 Job(name=E, time_id=3, priority=0)
@@ -169,6 +218,8 @@ Job(name=H, time_id=8, priority=1)
 Job(name=R, time_id=10, priority=1)]
 
 Merging jq1 and jq2...
+(using non-modifying overload)
+
 jq[Job(name=D, time_id=1, priority=0)
 Job(name=M, time_id=2, priority=1)
 Job(name=E, time_id=3, priority=0)
@@ -179,5 +230,34 @@ Job(name=B, time_id=7, priority=0)
 Job(name=H, time_id=8, priority=1)
 Job(name=A, time_id=9, priority=1)
 Job(name=R, time_id=10, priority=1)]
+
+jq1[Job(name=M, time_id=2, priority=1)
+Job(name=E, time_id=3, priority=0)
+Job(name=Q, time_id=5, priority=2)
+Job(name=A, time_id=9, priority=1)]
+
+jq2[Job(name=D, time_id=1, priority=0)
+Job(name=T, time_id=4, priority=0)
+Job(name=V, time_id=5, priority=1)
+Job(name=B, time_id=7, priority=0)
+Job(name=H, time_id=8, priority=1)
+Job(name=R, time_id=10, priority=1)]
+
+(using modifying overload)
+
+jq[Job(name=D, time_id=1, priority=0)
+Job(name=M, time_id=2, priority=1)
+Job(name=E, time_id=3, priority=0)
+Job(name=T, time_id=4, priority=0)
+Job(name=Q, time_id=5, priority=2)
+Job(name=V, time_id=5, priority=1)
+Job(name=B, time_id=7, priority=0)
+Job(name=H, time_id=8, priority=1)
+Job(name=A, time_id=9, priority=1)
+Job(name=R, time_id=10, priority=1)]
+
+jq1[]
+
+jq2[]
 
 */

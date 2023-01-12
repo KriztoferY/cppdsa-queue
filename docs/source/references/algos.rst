@@ -8,7 +8,17 @@ Algorithms are independent of implementation of the Queue ADT.
 Merging two queues
 ==================
 
+Modifying overload
+------------------
+
 .. doxygenfunction:: dsa::merge(IQueue<Elem, Impl> *queue1, IQueue<Elem, Impl> *queue2)
+    :project cppdsa-queue
+
+
+Non-modifying overload
+----------------------
+
+.. doxygenfunction:: dsa::merge(IQueue<Elem, Impl> const* queue1, IQueue<Elem, Impl> const* queue2)
     :project cppdsa-queue
 
 Example

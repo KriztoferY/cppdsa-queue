@@ -67,8 +67,9 @@ concept BinaryPredicate = requires (T t, Arg a, Arg b) {
  *
  * Elements are compared using the `dsa::BinaryPredicate` `compare` to
  * determine the order in which they appear in the merged queue. Relative order
- * of elements in the original queues are preserved. A new queue is created and
- * returned if both queues to merge are not empty.
+ * of elements in the original queues are preserved. A new queue will be
+ * created and returned, and the original queues will become empty after
+ * merging, if both queues to merge are not empty.
  *
  * @tparam Elem Type of each element in the queue.
  * @tparam Impl The derived implementation class of the Queue ADT of which the
@@ -78,8 +79,8 @@ concept BinaryPredicate = requires (T t, Arg a, Arg b) {
  *       the original queues. The signature of an equivalent function reads
  *       `bool (Elem const&, Elem const&)`, i.e. it must satisfy the
  *       `dsa::BinaryPredicate` concept.
- * @param queue1 A queue to merge.
- * @param queue2 Another queue to merge.
+ * @param queue1 A queue to merge. Mutable.
+ * @param queue2 Another queue to merge. Mutable.
  * @return The merged queue if both queues to merge are not empty, one of the
  *       queues to merge if the other is empty, `nullptr` if both are empty.
  *       **[IMPORTANT]** In the first case, call `dsa::destroy` when you're
@@ -91,6 +92,34 @@ template <typename Elem, template <typename> typename Impl,
           BinaryPredicate<Elem> compare>
 IQueue<Elem, Impl>* merge(IQueue<Elem, Impl>* queue1,
                           IQueue<Elem, Impl>* queue2);
+
+/**
+ * @overload
+ *
+ * If both queues to merge are not empty, a new queue will be created and
+ * returned, but the original queues will remain unchanged after merging.
+ *
+ * @tparam Elem Type of each element in the queue.
+ * @tparam Impl The derived implementation class of the Queue ADT of which the
+ *       two queues to merge are.
+ * @tparam compare A callable object that determines the element order in the
+ *       merged queue; it has not effect on the relative order of elements in
+ *       the original queues. The signature of an equivalent function reads
+ *       `bool (Elem const&, Elem const&)`, i.e. it must satisfy the
+ *       `dsa::BinaryPredicate` concept.
+ * @param queue1 A queue to merge. Immutable; no change after merging.
+ * @param queue2 Another queue to merge. Immutable; no change after merging.
+ * @return The merged queue if both queues to merge are not empty, one of the
+ *       queues to merge if the other is empty, `nullptr` if both are empty.
+ *       **[IMPORTANT]** In the first case, call `dsa::destroy` when you're
+ *       done with the merged queue to free the memory allocated to it.
+ * @note The complexity of the merge algorithm is `O(n1 + n2)` in both time and
+ *      space, where `n1` and `n2` are the sizes of the two queues to merge.
+ */
+template <typename Elem, template <typename> typename Impl,
+          BinaryPredicate<Elem> compare>
+IQueue<Elem, Impl>* merge(IQueue<Elem, Impl> const* queue1,
+                          IQueue<Elem, Impl> const* queue2);
 
 }   // namespace dsa
 
