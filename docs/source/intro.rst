@@ -96,8 +96,8 @@ generic queue type via pointer.
 So, if you're indeed a library developer writing such kind of functions, you're
 advised to document the proper usage in your documentation.
 
-Demo Program
-------------
+Demo Programs
+-------------
 
 Wanna see a queue and the algorithms in action? No problem. Follow the 
 installation instructions to build the project. You'll find a few demo programs 
