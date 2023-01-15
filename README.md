@@ -23,7 +23,7 @@ int main() {
         std::cout << q.front() << ' ';
         q.dequeue();
     }
-    std::cout << endl;
+    std::cout << std::endl;
     ...
     return 0;
 }
