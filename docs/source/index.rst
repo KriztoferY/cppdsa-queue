@@ -19,7 +19,7 @@ and is extensible by means of **template programming**.
          std::cout << q.front() << ' ';
          q.dequeue();
       }
-      std::cout << endl;
+      std::cout << std::endl;
       ...
       return 0;
    }
