@@ -1,0 +1,459 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="API Index" href="../genindex.html" /><link rel="prev" title="Singly Linked List Queue" href="sllist_queue.html" />
+
+    <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
+        <title>Algorithms on Queue ADT - C++ Queue | cppdsa-queue Library</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">C++ Queue | cppdsa-queue Library</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">C++ Queue | cppdsa-queue Library</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">A Quick Tour</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../references.html">API References</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="adt.html">The Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="circ_array_queue.html">Circular Array Queue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sllist_queue.html">Singly Linked List Queue</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Algorithms on Queue ADT</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="algorithms-on-queue-adt">
+<span id="algos"></span><h1>Algorithms on Queue ADT<a class="headerlink" href="#algorithms-on-queue-adt" title="Permalink to this heading">#</a></h1>
+<p>Algorithms are independent of implementation of the Queue ADT.</p>
+<section id="merging-two-queues">
+<h2>Merging two queues<a class="headerlink" href="#merging-two-queues" title="Permalink to this heading">#</a></h2>
+<section id="modifying-overload">
+<h3>Modifying overload<a class="headerlink" href="#modifying-overload" title="Permalink to this heading">#</a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0I0E0_15BinaryPredicateI4ElemEEN3dsa5mergeEP6IQueueI4Elem4ImplEP6IQueueI4Elem4ImplEP6IQueueI4Elem4ImplE">
+<span id="_CPPv3I0I0E0_15BinaryPredicateI4ElemEEN3dsa5mergeEP6IQueueI4Elem4ImplEP6IQueueI4Elem4ImplE"></span><span id="_CPPv2I0I0E0_15BinaryPredicateI4ElemEEN3dsa5mergeEP6IQueueI4Elem4ImplEP6IQueueI4Elem4ImplE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Elem</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Impl</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN3dsa15BinaryPredicateE" title="dsa::BinaryPredicate"><span class="n"><span class="pre">BinaryPredicate</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0I0E0_15BinaryPredicateI4ElemEEN3dsa5mergeEP6IQueueI4Elem4ImplEP6IQueueI4Elem4ImplEP6IQueueI4Elem4ImplE" title="dsa::merge::Elem"><span class="n"><span class="pre">Elem</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">compare</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="namespacedsa_1a463986e97ab234d2a54020841e3d25cf"></span><a class="reference internal" href="adt.html#_CPPv4I0I0E0EN3dsa6IQueueE" title="dsa::IQueue"><span class="n"><span class="pre">IQueue</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0I0E0_15BinaryPredicateI4ElemEEN3dsa5mergeEP6IQueueI4Elem4ImplEP6IQueueI4Elem4ImplEP6IQueueI4Elem4ImplE" title="dsa::merge::Elem"><span class="n"><span class="pre">Elem</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0I0E0_15BinaryPredicateI4ElemEEN3dsa5mergeEP6IQueueI4Elem4ImplEP6IQueueI4Elem4ImplEP6IQueueI4Elem4ImplE" title="dsa::merge::Impl"><span class="n"><span class="pre">Impl</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-prename descclassname"><span class="n"><span class="pre">dsa</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">merge</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="adt.html#_CPPv4I0I0E0EN3dsa6IQueueE" title="dsa::IQueue"><span class="n"><span class="pre">IQueue</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0I0E0_15BinaryPredicateI4ElemEEN3dsa5mergeEP6IQueueI4Elem4ImplEP6IQueueI4Elem4ImplEP6IQueueI4Elem4ImplE" title="dsa::merge::Elem"><span class="n"><span class="pre">Elem</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0I0E0_15BinaryPredicateI4ElemEEN3dsa5mergeEP6IQueueI4Elem4ImplEP6IQueueI4Elem4ImplEP6IQueueI4Elem4ImplE" title="dsa::merge::Impl"><span class="n"><span class="pre">Impl</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">queue1</span></span>, <a class="reference internal" href="adt.html#_CPPv4I0I0E0EN3dsa6IQueueE" title="dsa::IQueue"><span class="n"><span class="pre">IQueue</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0I0E0_15BinaryPredicateI4ElemEEN3dsa5mergeEP6IQueueI4Elem4ImplEP6IQueueI4Elem4ImplEP6IQueueI4Elem4ImplE" title="dsa::merge::Elem"><span class="n"><span class="pre">Elem</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0I0E0_15BinaryPredicateI4ElemEEN3dsa5mergeEP6IQueueI4Elem4ImplEP6IQueueI4Elem4ImplEP6IQueueI4Elem4ImplE" title="dsa::merge::Impl"><span class="n"><span class="pre">Impl</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">queue2</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0I0E0_15BinaryPredicateI4ElemEEN3dsa5mergeEP6IQueueI4Elem4ImplEP6IQueueI4Elem4ImplEP6IQueueI4Elem4ImplE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Stable-merges two queues. </p>
+<p>Elements are compared using the <code class="docutils literal notranslate"><a class="reference internal" href="#conceptdsa_1_1BinaryPredicate"><span class="std std-ref"><span class="pre">dsa::BinaryPredicate</span></span></a></code> <code class="docutils literal notranslate"><span class="pre">compare</span></code> to determine the order in which they appear in the merged queue. Relative order of elements in the original queues are preserved. A new queue will be created and returned, and the original queues will become empty after merging, if both queues to merge are not empty.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The complexity of the merge algorithm is <code class="docutils literal notranslate"><span class="pre">O(n1</span> <span class="pre">+</span> <span class="pre">n2)</span></code> in both time and space, where <code class="docutils literal notranslate"><span class="pre">n1</span></code> and <code class="docutils literal notranslate"><span class="pre">n2</span></code> are the sizes of the two queues to merge. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Elem</strong> – Type of each element in the queue. </p></li>
+<li><p><strong>Impl</strong> – The derived implementation class of the Queue ADT of which the two queues to merge are. </p></li>
+<li><p><strong>compare</strong> – A callable object that determines the element order in the merged queue; it has not effect on the relative order of elements in the original queues. The signature of an equivalent function reads <code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">(Elem</span> <span class="pre">const&amp;,</span> <span class="pre">Elem</span> <span class="pre">const&amp;)</span></code>, i.e. it must satisfy the <code class="docutils literal notranslate"><a class="reference internal" href="#conceptdsa_1_1BinaryPredicate"><span class="std std-ref"><span class="pre">dsa::BinaryPredicate</span></span></a></code> concept. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>queue1</strong> – A queue to merge. Mutable. </p></li>
+<li><p><strong>queue2</strong> – Another queue to merge. Mutable. </p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The merged queue if both queues to merge are not empty, one of the queues to merge if the other is empty, <code class="docutils literal notranslate"><span class="pre">nullptr</span></code> if both are empty. <strong>[IMPORTANT]</strong> In the first case, call <code class="docutils literal notranslate"><a class="reference internal" href="adt.html#namespacedsa_1ad92fb41e6aab58a7a8d51e4ae83080eb"><span class="std std-ref"><span class="pre">dsa::destroy</span></span></a></code> when you’re done with the merged queue to free the memory allocated to it. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="non-modifying-overload">
+<h3>Non-modifying overload<a class="headerlink" href="#non-modifying-overload" title="Permalink to this heading">#</a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0I0E0_15BinaryPredicateI4ElemEEN3dsa5mergeEP6IQueueI4Elem4ImplEPK6IQueueI4Elem4ImplEPK6IQueueI4Elem4ImplE">
+<span id="_CPPv3I0I0E0_15BinaryPredicateI4ElemEEN3dsa5mergeEPK6IQueueI4Elem4ImplEPK6IQueueI4Elem4ImplE"></span><span id="_CPPv2I0I0E0_15BinaryPredicateI4ElemEEN3dsa5mergeEPK6IQueueI4Elem4ImplEPK6IQueueI4Elem4ImplE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Elem</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Impl</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I00EN3dsa15BinaryPredicateE" title="dsa::BinaryPredicate"><span class="n"><span class="pre">BinaryPredicate</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0I0E0_15BinaryPredicateI4ElemEEN3dsa5mergeEP6IQueueI4Elem4ImplEPK6IQueueI4Elem4ImplEPK6IQueueI4Elem4ImplE" title="dsa::merge::Elem"><span class="n"><span class="pre">Elem</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">compare</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="namespacedsa_1a74e656440dd35503d0dee4b72015f453"></span><a class="reference internal" href="adt.html#_CPPv4I0I0E0EN3dsa6IQueueE" title="dsa::IQueue"><span class="n"><span class="pre">IQueue</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0I0E0_15BinaryPredicateI4ElemEEN3dsa5mergeEP6IQueueI4Elem4ImplEPK6IQueueI4Elem4ImplEPK6IQueueI4Elem4ImplE" title="dsa::merge::Elem"><span class="n"><span class="pre">Elem</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0I0E0_15BinaryPredicateI4ElemEEN3dsa5mergeEP6IQueueI4Elem4ImplEPK6IQueueI4Elem4ImplEPK6IQueueI4Elem4ImplE" title="dsa::merge::Impl"><span class="n"><span class="pre">Impl</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-prename descclassname"><span class="n"><span class="pre">dsa</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">merge</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="adt.html#_CPPv4I0I0E0EN3dsa6IQueueE" title="dsa::IQueue"><span class="n"><span class="pre">IQueue</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0I0E0_15BinaryPredicateI4ElemEEN3dsa5mergeEP6IQueueI4Elem4ImplEPK6IQueueI4Elem4ImplEPK6IQueueI4Elem4ImplE" title="dsa::merge::Elem"><span class="n"><span class="pre">Elem</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0I0E0_15BinaryPredicateI4ElemEEN3dsa5mergeEP6IQueueI4Elem4ImplEPK6IQueueI4Elem4ImplEPK6IQueueI4Elem4ImplE" title="dsa::merge::Impl"><span class="n"><span class="pre">Impl</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">queue1</span></span>, <a class="reference internal" href="adt.html#_CPPv4I0I0E0EN3dsa6IQueueE" title="dsa::IQueue"><span class="n"><span class="pre">IQueue</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0I0E0_15BinaryPredicateI4ElemEEN3dsa5mergeEP6IQueueI4Elem4ImplEPK6IQueueI4Elem4ImplEPK6IQueueI4Elem4ImplE" title="dsa::merge::Elem"><span class="n"><span class="pre">Elem</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0I0E0_15BinaryPredicateI4ElemEEN3dsa5mergeEP6IQueueI4Elem4ImplEPK6IQueueI4Elem4ImplEPK6IQueueI4Elem4ImplE" title="dsa::merge::Impl"><span class="n"><span class="pre">Impl</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">queue2</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0I0E0_15BinaryPredicateI4ElemEEN3dsa5mergeEP6IQueueI4Elem4ImplEPK6IQueueI4Elem4ImplEPK6IQueueI4Elem4ImplE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.</p>
+<p>If both queues to merge are not empty, a new queue will be created and returned, but the original queues will remain unchanged after merging.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The complexity of the merge algorithm is <code class="docutils literal notranslate"><span class="pre">O(n1</span> <span class="pre">+</span> <span class="pre">n2)</span></code> in both time and space, where <code class="docutils literal notranslate"><span class="pre">n1</span></code> and <code class="docutils literal notranslate"><span class="pre">n2</span></code> are the sizes of the two queues to merge. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Elem</strong> – Type of each element in the queue. </p></li>
+<li><p><strong>Impl</strong> – The derived implementation class of the Queue ADT of which the two queues to merge are. </p></li>
+<li><p><strong>compare</strong> – A callable object that determines the element order in the merged queue; it has not effect on the relative order of elements in the original queues. The signature of an equivalent function reads <code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">(Elem</span> <span class="pre">const&amp;,</span> <span class="pre">Elem</span> <span class="pre">const&amp;)</span></code>, i.e. it must satisfy the <code class="docutils literal notranslate"><a class="reference internal" href="#conceptdsa_1_1BinaryPredicate"><span class="std std-ref"><span class="pre">dsa::BinaryPredicate</span></span></a></code> concept. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>queue1</strong> – A queue to merge. Immutable; no change after merging. </p></li>
+<li><p><strong>queue2</strong> – Another queue to merge. Immutable; no change after merging. </p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The merged queue if both queues to merge are not empty, one of the queues to merge if the other is empty, <code class="docutils literal notranslate"><span class="pre">nullptr</span></code> if both are empty. <strong>[IMPORTANT]</strong> In the first case, call <code class="docutils literal notranslate"><a class="reference internal" href="adt.html#namespacedsa_1ad92fb41e6aab58a7a8d51e4ae83080eb"><span class="std std-ref"><span class="pre">dsa::destroy</span></span></a></code> when you’re done with the merged queue to free the memory allocated to it. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="example">
+<h4>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h4>
+<p>Merges two job queues in which jobs are ranked based on time and assigned
+priority.</p>
+<p>Here are the <code class="docutils literal notranslate"><span class="pre">Job</span></code> class along with a function object that specifies how
+jobs are compared and satisfies the <code class="docutils literal notranslate"><span class="pre">BinaryPredicate</span></code> concept, and an
+overloaded <code class="docutils literal notranslate"><span class="pre">operator&lt;&lt;()</span></code> to make the <code class="docutils literal notranslate"><span class="pre">Job</span></code> class <code class="docutils literal notranslate"><span class="pre">Insertable</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">Job</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">time_id</span><span class="p">;</span><span class="w">              </span><span class="c1">// unique ID as timestamp</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">priority</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span><span class="w">       </span><span class="c1">// job priority</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w">  </span><span class="n">name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;unnamed&quot;</span><span class="w"> </span><span class="p">};</span><span class="w">   </span><span class="c1">// job name (non-unique)</span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="k">struct</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Compares two jobs based on time ID, followed by priority.</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="nf">operator</span><span class="p">()(</span><span class="n">Job</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">j1</span><span class="p">,</span><span class="w"> </span><span class="n">Job</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">j2</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">j1</span><span class="p">.</span><span class="n">time_id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">j2</span><span class="p">.</span><span class="n">time_id</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">j1</span><span class="p">.</span><span class="n">priority</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">j2</span><span class="p">.</span><span class="n">priority</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">j1</span><span class="p">.</span><span class="n">time_id</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">j2</span><span class="p">.</span><span class="n">time_id</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"> </span><span class="n">compare_jobs</span><span class="p">;</span><span class="w"></span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span><span class="w"> </span><span class="n">os</span><span class="p">,</span><span class="w"> </span><span class="n">Job</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">job</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">os</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Job(name=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">job</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;, time_id=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">job</span><span class="p">.</span><span class="n">time_id</span><span class="w"></span>
+<span class="w">            </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;, priority=&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">job</span><span class="p">.</span><span class="n">priority</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;)&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>We are going to populate two circular array queue of <code class="docutils literal notranslate"><span class="pre">Job</span></code> s and then merge
+them.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="p">...</span><span class="w"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;circ_array_queue.hpp&quot;</span><span class="c1">   // CircArrayQueue&lt;T&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;algos.hpp&quot;</span><span class="c1">              // merge&lt;...&gt;()</span><span class="cp"></span>
+
+<span class="k">using</span><span class="w"> </span><span class="n">JobQueue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dsa</span><span class="o">::</span><span class="n">CircArrayQueue</span><span class="o">&lt;</span><span class="n">Job</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+
+<span class="n">dsa</span><span class="o">::</span><span class="n">IQueue</span><span class="o">&lt;</span><span class="n">Job</span><span class="p">,</span><span class="w"> </span><span class="n">dsa</span><span class="o">::</span><span class="n">CircArrayQueue</span><span class="o">&gt;*</span><span class="w"> </span><span class="n">jq1</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JobQueue</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="p">};</span><span class="w"></span>
+<span class="n">Job</span><span class="w"> </span><span class="n">jobs1</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;M&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;E&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Q&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;A&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">jobs1</span><span class="p">)</span><span class="w"> </span><span class="n">jq1</span><span class="o">-&gt;</span><span class="n">enqueue</span><span class="p">(</span><span class="n">job</span><span class="p">);</span><span class="w"></span>
+
+<span class="n">dsa</span><span class="o">::</span><span class="n">IQueue</span><span class="o">&lt;</span><span class="n">Job</span><span class="p">,</span><span class="w"> </span><span class="n">dsa</span><span class="o">::</span><span class="n">CircArrayQueue</span><span class="o">&gt;*</span><span class="w"> </span><span class="n">jq2</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JobQueue</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="p">};</span><span class="w"></span>
+<span class="n">Job</span><span class="w"> </span><span class="n">jobs2</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;D&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;T&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;V&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">              </span><span class="p">{</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;B&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;H&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;R&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">};</span><span class="w"></span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">jobs2</span><span class="p">)</span><span class="w"> </span><span class="n">jq2</span><span class="o">-&gt;</span><span class="n">enqueue</span><span class="p">(</span><span class="n">job</span><span class="p">);</span><span class="w"></span>
+
+<span class="k">auto</span><span class="o">*</span><span class="w"> </span><span class="n">jq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dsa</span><span class="o">::</span><span class="n">merge</span><span class="o">&lt;</span><span class="n">Job</span><span class="p">,</span><span class="w"></span>
+<span class="w">                      </span><span class="n">dsa</span><span class="o">::</span><span class="n">CircArrayQueue</span><span class="p">,</span><span class="w"></span>
+<span class="w">                      </span><span class="k">decltype</span><span class="p">(</span><span class="n">compare_jobs</span><span class="p">)</span><span class="o">&gt;</span><span class="p">(</span><span class="n">jq1</span><span class="p">,</span><span class="w"> </span><span class="n">jq2</span><span class="p">);</span><span class="w"></span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Merging jq1 and jq2...&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39;\n&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">jq</span><span class="o">-&gt;</span><span class="n">to_string</span><span class="p">(</span><span class="s">&quot;jq&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+
+<span class="n">destroy</span><span class="p">(</span><span class="n">jq1</span><span class="p">);</span><span class="w"></span>
+<span class="n">destroy</span><span class="p">(</span><span class="n">jq2</span><span class="p">);</span><span class="w"></span>
+<span class="n">destroy</span><span class="p">(</span><span class="n">jq</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The merged queue looks like:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>Merging jq1 and jq2...
+jq<span class="o">[</span>Job<span class="o">(</span><span class="nv">name</span><span class="o">=</span>D, <span class="nv">time_id</span><span class="o">=</span><span class="m">1</span>, <span class="nv">priority</span><span class="o">=</span><span class="m">0</span><span class="o">)</span>
+Job<span class="o">(</span><span class="nv">name</span><span class="o">=</span>M, <span class="nv">time_id</span><span class="o">=</span><span class="m">2</span>, <span class="nv">priority</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>
+Job<span class="o">(</span><span class="nv">name</span><span class="o">=</span>E, <span class="nv">time_id</span><span class="o">=</span><span class="m">3</span>, <span class="nv">priority</span><span class="o">=</span><span class="m">0</span><span class="o">)</span>
+Job<span class="o">(</span><span class="nv">name</span><span class="o">=</span>T, <span class="nv">time_id</span><span class="o">=</span><span class="m">4</span>, <span class="nv">priority</span><span class="o">=</span><span class="m">0</span><span class="o">)</span>
+Job<span class="o">(</span><span class="nv">name</span><span class="o">=</span>Q, <span class="nv">time_id</span><span class="o">=</span><span class="m">5</span>, <span class="nv">priority</span><span class="o">=</span><span class="m">2</span><span class="o">)</span>
+Job<span class="o">(</span><span class="nv">name</span><span class="o">=</span>V, <span class="nv">time_id</span><span class="o">=</span><span class="m">5</span>, <span class="nv">priority</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>
+Job<span class="o">(</span><span class="nv">name</span><span class="o">=</span>B, <span class="nv">time_id</span><span class="o">=</span><span class="m">7</span>, <span class="nv">priority</span><span class="o">=</span><span class="m">0</span><span class="o">)</span>
+Job<span class="o">(</span><span class="nv">name</span><span class="o">=</span>H, <span class="nv">time_id</span><span class="o">=</span><span class="m">8</span>, <span class="nv">priority</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>
+Job<span class="o">(</span><span class="nv">name</span><span class="o">=</span>A, <span class="nv">time_id</span><span class="o">=</span><span class="m">9</span>, <span class="nv">priority</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>
+Job<span class="o">(</span><span class="nv">name</span><span class="o">=</span>R, <span class="nv">time_id</span><span class="o">=</span><span class="m">10</span>, <span class="nv">priority</span><span class="o">=</span><span class="m">1</span><span class="o">)]</span>
+</pre></div>
+</div>
+<p>Note that even though jobs Q and V have the same timestamp, job Q appears
+before job V as it has a higher priority.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+</section>
+</section>
+<section id="concepts">
+<h2>Concepts<a class="headerlink" href="#concepts" title="Permalink to this heading">#</a></h2>
+<dl class="cpp concept">
+<dt class="sig sig-object cpp" id="_CPPv4I00EN3dsa15BinaryPredicateE">
+<span id="_CPPv3I00EN3dsa15BinaryPredicateE"></span><span id="_CPPv2I00EN3dsa15BinaryPredicateE"></span><span class="target" id="conceptdsa_1_1BinaryPredicate"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Arg</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">concept</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">BinaryPredicate</span></span></span><a class="headerlink" href="#_CPPv4I00EN3dsa15BinaryPredicateE" title="Permalink to this definition">#</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;algos.hpp&gt;</em></div>
+<p>Specifies that the type <code class="docutils literal notranslate"><span class="pre">T</span></code> is a callable type that, when called, behaves as a binary predicate that accepts two instances of type <code class="docutils literal notranslate"><span class="pre">Arg</span></code>. </p>
+<dl class="field-list simple">
+<dt class="field-odd">tparam T<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The type to test. </p>
+</dd>
+<dt class="field-even">tparam Arg<span class="colon">:</span></dt>
+<dd class="field-even"><p>The argument type of the binary predicate. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../genindex.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">API Index</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="sllist_queue.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Singly Linked List Queue</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022 - 2023, KriztoferY (https://github.com/KriztoferY)
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Algorithms on Queue ADT</a><ul>
+<li><a class="reference internal" href="#merging-two-queues">Merging two queues</a><ul>
+<li><a class="reference internal" href="#modifying-overload">Modifying overload</a></li>
+<li><a class="reference internal" href="#non-modifying-overload">Non-modifying overload</a><ul>
+<li><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#concepts">Concepts</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    </body>
+</html>

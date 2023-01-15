@@ -1,0 +1,436 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Installation" href="install.html" /><link rel="prev" title="The cppdsa-queue Library" href="index.html" />
+
+    <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
+        <title>A Quick Tour - C++ Queue | cppdsa-queue Library</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">C++ Queue | cppdsa-queue Library</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">C++ Queue | cppdsa-queue Library</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">A Quick Tour</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="references.html">API References</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="references/adt.html">The Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references/circ_array_queue.html">Circular Array Queue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references/sllist_queue.html">Singly Linked List Queue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references/algos.html">Algorithms on Queue ADT</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="a-quick-tour">
+<h1>A Quick Tour<a class="headerlink" href="#a-quick-tour" title="Permalink to this heading">#</a></h1>
+<section id="using-a-queue">
+<h2>Using a Queue<a class="headerlink" href="#using-a-queue" title="Permalink to this heading">#</a></h2>
+<p>From the consumers’ perspective, the <code class="docutils literal notranslate"><span class="pre">cppdsa-queue</span></code> library provides various
+ready-to-use queue data structures that can store pretty much any kind of C++
+objects of both the fundamental and user-defined types. Each queue
+implementation is a class template and has the same standardized API, except
+the additional features specific to a particular implementation.</p>
+<p>Having known the type <cite>T</cite> of the elements to store, you instantiate a queue
+from the chosen class template. It’s often convenient to define a type alias
+for it upfront. Now, let’s try the unbounded
+<a class="reference internal" href="references/circ_array_queue.html#circ-array-queue"><span class="std std-ref">Circular Array Queue</span></a>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;circ_array_queue.hpp&quot;</span><span class="cp"></span>
+
+<span class="k">using</span><span class="w"> </span><span class="n">IntQueue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dsa</span><span class="o">::</span><span class="n">CircArrayQueue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">auto</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IntQueue</span><span class="w"> </span><span class="p">{};</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Now, you’ve an empty queue <code class="docutils literal notranslate"><span class="pre">q</span></code> awaiting data.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">nums</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">nums</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">q</span><span class="p">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">num</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w">     </span><span class="c1">// prints 4</span>
+</pre></div>
+</div>
+<p>In case of large element type <cite>T</cite>, you may use the <code class="docutils literal notranslate"><span class="pre">emplace&lt;Args...&gt;()</span></code>
+member function to create the new elements in-place without copying and moving
+to boost performance.</p>
+<p>In any case, you may then use the typical idiom to process the elements in the
+queue in the first-in-first-out (FIFO) manner.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="sc">&#39; &#39;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">q</span><span class="p">.</span><span class="n">dequeue</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>As long as you’re not using the <em>static polymorphism</em> feature of the library,
+you have nothing to worry about <code class="docutils literal notranslate"><span class="pre">q</span></code> and its elements when you’re done with it,
+unless <code class="docutils literal notranslate"><span class="pre">q</span></code> was created on the free store and assigned to a pointer of the
+exact same type or simply an <code class="docutils literal notranslate"><span class="pre">auto</span></code> pointer. In the latter case, of course
+you’ll simply have to do <code class="docutils literal notranslate"><span class="pre">delete</span> <span class="pre">q;</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">IntQueue</span><span class="o">*</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IntQueue</span><span class="w"> </span><span class="p">{};</span><span class="w"></span>
+<span class="p">...</span><span class="w"></span>
+<span class="k">delete</span><span class="w"> </span><span class="n">q</span><span class="p">;</span><span class="w">       </span><span class="c1">// GOOD: it works</span>
+</pre></div>
+</div>
+<section id="static-polymorphism">
+<h3>Static Polymorphism<a class="headerlink" href="#static-polymorphism" title="Permalink to this heading">#</a></h3>
+<p>Now, suppose you’ve created a queue on the free store and assigned it to a
+pointer to the “abstract” base class template.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">IQueue</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="n">dsa</span><span class="o">::</span><span class="n">CircArrayQueue</span><span class="o">&gt;*</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">dsa</span><span class="o">::</span><span class="n">CircArrayQueue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{};</span><span class="w"></span>
+<span class="p">...</span><span class="w"></span>
+<span class="k">delete</span><span class="w"> </span><span class="n">q</span><span class="p">;</span><span class="w">       </span><span class="c1">// BAD: memory leak!</span>
+</pre></div>
+</div>
+<p>The last statement is the catch! When you’re done with the queue, you need to
+<strong>use the free function</strong> <code class="docutils literal notranslate"><span class="pre">destroy&lt;Elem,</span> <span class="pre">Impl&gt;()</span></code> <strong>to destroy the queue on
+the free store via a base pointer</strong>. <code class="docutils literal notranslate"><span class="pre">delete</span> <span class="pre">q</span></code> will only trigger the base
+class destructor, skipping the derived class destructor that actually frees the
+memory associated with the queue elements on the free store.</p>
+<p>The typical use case of this situation is using a function that accepts a
+generic queue type via pointer.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// library code</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">Elem</span><span class="p">,</span><span class="w"> </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="o">&gt;</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">Impl</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">process</span><span class="p">(</span><span class="n">IQueue</span><span class="o">&lt;</span><span class="n">Elem</span><span class="p">,</span><span class="w"> </span><span class="n">Impl</span><span class="o">&gt;*</span><span class="w"> </span><span class="n">queue</span><span class="p">,</span><span class="w"> </span><span class="p">...);</span><span class="w"></span>
+
+<span class="c1">// client code</span>
+<span class="n">IQueue</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="n">dsa</span><span class="o">::</span><span class="n">CircArrayQueue</span><span class="o">&gt;*</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">dsa</span><span class="o">::</span><span class="n">CircArrayQueue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{};</span><span class="w"></span>
+<span class="n">process</span><span class="p">(</span><span class="n">q</span><span class="p">);</span><span class="w"></span>
+<span class="p">...</span><span class="w"></span>
+<span class="n">dsa</span><span class="o">::</span><span class="n">destroy</span><span class="p">(</span><span class="n">q</span><span class="p">);</span><span class="w">    </span><span class="c1">// GOOD: no memory leak</span>
+</pre></div>
+</div>
+<p>So, if you’re indeed a library developer writing such kind of functions, you’re
+advised to document the proper usage in your documentation.</p>
+</section>
+<section id="demo-programs">
+<h3>Demo Programs<a class="headerlink" href="#demo-programs" title="Permalink to this heading">#</a></h3>
+<p>Wanna see a queue and the algorithms in action? No problem. Follow the
+installation instructions to build the project. You’ll find a few demo programs
+in the <code class="docutils literal notranslate"><span class="pre">bin/</span></code> subdirectory.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+</section>
+<section id="implementing-your-own-queue">
+<h2>Implementing Your Own Queue<a class="headerlink" href="#implementing-your-own-queue" title="Permalink to this heading">#</a></h2>
+<p>By design, all queue types are subclasses of the same “abstract” class template
+<code class="docutils literal notranslate"><span class="pre">IQueue&lt;Elem,</span> <span class="pre">Impl&gt;</span></code>, which specifies the interface of a conventional queue
+data structure. The class template definition of the <a class="reference internal" href="references/circ_array_queue.html#circ-array-queue"><span class="std std-ref">Circular Array
+Queue</span></a> looks something like this:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">Elem</span><span class="o">&gt;</span><span class="w"></span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CircArrayQueue</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">IQueue</span><span class="o">&lt;</span><span class="n">Elem</span><span class="p">,</span><span class="w"> </span><span class="n">CircArrayQueue</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here, the template parameter <code class="docutils literal notranslate"><span class="pre">Elem</span></code> specifies the queue element type, and
+the implementation class template inherit from the “abstract” base class
+template using the <em>Curiously Recurring Template Pattern (CRTP)</em>, which is a
+key to achieving static inheritance and polymorphism.</p>
+<p>Let’s say you’re going to define a class template <code class="docutils literal notranslate"><span class="pre">MyQueue&lt;Elem&gt;</span></code> to
+implement the Queue ADT. Here is a blueprint to get you started:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">dsa</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">Elem</span><span class="o">&gt;</span><span class="w"></span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MyQueue</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">IQueue</span><span class="o">&lt;</span><span class="n">Elem</span><span class="p">,</span><span class="w"> </span><span class="n">MyQueue</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">friend</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">IQueue</span><span class="o">&lt;</span><span class="n">Elem</span><span class="p">,</span><span class="w"> </span><span class="n">MyQueue</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span>
+
+<span class="k">public</span><span class="o">:</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/* ctor, dtor, copy &amp; move op= as appropriate */</span><span class="w"></span>
+
+<span class="w">    </span><span class="cm">/* member functions specific to your implementation if any */</span><span class="w"></span>
+
+<span class="k">private</span><span class="o">:</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/* data members */</span><span class="w"></span>
+
+<span class="w">    </span><span class="cm">/* helper functions if any */</span><span class="w"></span>
+
+<span class="w">    </span><span class="cm">/* ### MANDATORY INTERFACE MATCHERS ### */</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="p">}</span><span class="w">  </span><span class="c1">// end namespace</span>
+</pre></div>
+</div>
+<p>The <em>mandatory</em> <strong>interface matchers</strong> are the private member functions that
+actually realize the functionality of their respective parent class members in
+<code class="docutils literal notranslate"><span class="pre">IQueue&lt;Elem,</span> <span class="pre">Impl&gt;</span></code>. Let’s zoom in to see what’s expected there.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="nf">size_</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span><span class="p">;</span><span class="w"></span>
+<span class="kt">bool</span><span class="w">        </span><span class="nf">empty_</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="k">noexcept</span><span class="p">;</span><span class="w"></span>
+<span class="kt">void</span><span class="w">        </span><span class="nf">iter_</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">Elem</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+<span class="n">Elem</span><span class="o">&amp;</span><span class="w">       </span><span class="nf">front_</span><span class="p">();</span><span class="w"></span>
+<span class="n">Elem</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">front_</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="p">;</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">enqueue_</span><span class="p">(</span><span class="n">Elem</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">elem</span><span class="p">);</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">enqueue_</span><span class="p">(</span><span class="n">Elem</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">elem</span><span class="p">);</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">dequeue_</span><span class="p">();</span><span class="w"></span>
+
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">emplace_</span><span class="p">(</span><span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span><span class="w"> </span><span class="n">args</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>You’re advised to follow the coding style of the <code class="docutils literal notranslate"><span class="pre">cppdsa-*</span></code> libraries to
+implement them all in a separate <code class="docutils literal notranslate"><span class="pre">.inl</span></code> file and then <code class="docutils literal notranslate"><span class="pre">#include</span></code> it at the
+end of the header file for the <code class="docutils literal notranslate"><span class="pre">MyQueue&lt;Elem&gt;</span></code> class template.</p>
+<p>This is it!</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="install.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Installation</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Home</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022 - 2023, KriztoferY (https://github.com/KriztoferY)
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">A Quick Tour</a><ul>
+<li><a class="reference internal" href="#using-a-queue">Using a Queue</a><ul>
+<li><a class="reference internal" href="#static-polymorphism">Static Polymorphism</a></li>
+<li><a class="reference internal" href="#demo-programs">Demo Programs</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#implementing-your-own-queue">Implementing Your Own Queue</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/scripts/furo.js"></script>
+    </body>
+</html>

@@ -1,0 +1,591 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Circular Array Queue" href="circ_array_queue.html" /><link rel="prev" title="API References" href="../references.html" />
+
+    <!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
+        <title>The Interface - C++ Queue | cppdsa-queue Library</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">C++ Queue | cppdsa-queue Library</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">C++ Queue | cppdsa-queue Library</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">A Quick Tour</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../references.html">API References</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">The Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="circ_array_queue.html">Circular Array Queue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sllist_queue.html">Singly Linked List Queue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="algos.html">Algorithms on Queue ADT</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="the-interface">
+<span id="adt"></span><h1>The Interface<a class="headerlink" href="#the-interface" title="Permalink to this heading">#</a></h1>
+<p>The central piece of the library is the class template
+<code class="docutils literal notranslate"><span class="pre">dsa::IQueue&lt;Elem,</span> <span class="pre">Impl&gt;</span></code> that specifies the interface of the Queue ADT. It
+is an abstract class template in the sense that client code cannot instantiate
+any queue classes from it. All generic implementations of the Queue ADT must
+statically inherit from it using the Curiously Recurring Template Pattern
+(CRTP) and fully implement the specified interface via private member
+functions, so as to become an instantiable class template.</p>
+<p>At the topmost level of the library, a free function is defined to destroy a
+queue on the free store via a base pointer. Although memory (de)allocation of
+the queue elements is handled automatically by all baked-in implementations,
+things get complicated when client code take advantage of static polymorphism
+using pointers of the base type <code class="docutils literal notranslate"><span class="pre">dsa::IQueue&lt;Elem,</span> <span class="pre">Impl&gt;</span></code>, which at run time
+actually points to some derived type (a concrete implementation of the queue
+ADT). Having divorced from <code class="docutils literal notranslate"><span class="pre">virtual</span></code>,  a <code class="docutils literal notranslate"><span class="pre">delete</span></code> expression with a base
+pointer does not invoke the derived class destructor as desired. Here comes the
+support function to avoid such pitfall.</p>
+<p>In addition, there is also a custom exception class that indicates invalid
+operations on an empty queue.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<section id="abstract-data-type-adt">
+<h2>Abstract Data Type (ADT)<a class="headerlink" href="#abstract-data-type-adt" title="Permalink to this heading">#</a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4I0I0E0EN3dsa6IQueueE">
+<span id="_CPPv3I0I0E0EN3dsa6IQueueE"></span><span id="_CPPv2I0I0E0EN3dsa6IQueueE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Elem</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Impl</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classdsa_1_1IQueue"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">IQueue</span></span></span><a class="headerlink" href="#_CPPv4I0I0E0EN3dsa6IQueueE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The queue abstract data type (ADT) </p>
+<p>A sequential ADT that emulates the first-in-first-out behavior of a queue in real world. This class template specifies the API for all implementations of the queue ADT in the <code class="docutils literal notranslate"><span class="pre">cppdsa-queue</span></code> library.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All implementations of the queue ADT must statically inherit this class template using the Curiously Recurring Template Pattern (CRTP). The inherited class template must implement the private member functions <code class="docutils literal notranslate"><span class="pre">size_()</span></code>, <code class="docutils literal notranslate"><span class="pre">empty_()</span></code>, <code class="docutils literal notranslate"><span class="pre">iter_()</span></code>, <code class="docutils literal notranslate"><span class="pre">front_()</span></code>, <code class="docutils literal notranslate"><span class="pre">enqueue_()</span></code>, <code class="docutils literal notranslate"><span class="pre">dequeue_()</span></code>, and <code class="docutils literal notranslate"><span class="pre">emplace_&lt;...Args&gt;()</span></code> to realize the functionalty provided by the respective parent class member functions, including all overloads, unless the client code of the inherited class template will not require certain operations. A default implementation for <code class="docutils literal notranslate"><span class="pre">to_string_()</span></code> is provided but you may override it to customize the string representation for your implementation. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Elem</strong> – The element type. </p></li>
+<li><p><strong>Impl</strong> – The derived implementation class. </p></li>
+</ul>
+</dd>
+</dl>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N3dsa6IQueue9elem_typeE">
+<span id="_CPPv3N3dsa6IQueue9elem_typeE"></span><span id="_CPPv2N3dsa6IQueue9elem_typeE"></span><span class="target" id="classdsa_1_1IQueue_1ab482a8e7e3bbbd63730e6b866de0675b"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">elem_type</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">remove_const_t</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0I0E0EN3dsa6IQueueE" title="dsa::IQueue::Elem"><span class="n"><span class="pre">Elem</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N3dsa6IQueue9elem_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Queue element type. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3dsa6IQueue4sizeEv">
+<span id="_CPPv3NK3dsa6IQueue4sizeEv"></span><span id="_CPPv2NK3dsa6IQueue4sizeEv"></span><span id="dsa::IQueue::sizeC"></span><span class="target" id="classdsa_1_1IQueue_1ac9c9855789b0748f50b7e1315b0b8db3"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK3dsa6IQueue4sizeEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Number of elements in the queue. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3dsa6IQueue5emptyEv">
+<span id="_CPPv3NK3dsa6IQueue5emptyEv"></span><span id="_CPPv2NK3dsa6IQueue5emptyEv"></span><span id="dsa::IQueue::emptyC"></span><span class="target" id="classdsa_1_1IQueue_1a9553738fbfa5915e02bfee1b8faa2517"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">empty</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><a class="headerlink" href="#_CPPv4NK3dsa6IQueue5emptyEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Determines if this queue has no elements. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3dsa6IQueue4iterENSt8functionIFvRK4ElemEEE">
+<span id="_CPPv3NK3dsa6IQueue4iterENSt8functionIFvRK4ElemEEE"></span><span id="_CPPv2NK3dsa6IQueue4iterENSt8functionIFvRK4ElemEEE"></span><span class="target" id="classdsa_1_1IQueue_1a80f9a0591529b4f61ac7ceb69bcd06f9"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iter</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">&lt;</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="#_CPPv4I0I0E0EN3dsa6IQueueE" title="dsa::IQueue::Elem"><span class="n"><span class="pre">Elem</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">action</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK3dsa6IQueue4iterENSt8functionIFvRK4ElemEEE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Iterates over all elements of this queue from the front. </p>
+<p>The given operation will be performed on each element iterated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>action</strong> – The operation to be performed on each element. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I_10InsertableENK3dsa6IQueue9to_stringENSt6stringENSt11string_viewENSt11string_viewE">
+<span id="_CPPv3I_10InsertableENK3dsa6IQueue9to_stringENSt11string_viewENSt11string_viewE"></span><span id="_CPPv2I_10InsertableENK3dsa6IQueue9to_stringENSt11string_viewENSt11string_viewE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN3dsa10InsertableE" title="dsa::Insertable"><span class="n"><span class="pre">Insertable</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0I0E0EN3dsa6IQueueE" title="dsa::IQueue::Elem"><span class="n"><span class="pre">Elem</span></span></a><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classdsa_1_1IQueue_1a9cf5f065ea2ef5e261ff445d05b53ce5"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">to_string</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">prefix</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;&quot;</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string_view</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sep</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;</span> <span class="pre">&quot;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I_10InsertableENK3dsa6IQueue9to_stringENSt6stringENSt11string_viewENSt11string_viewE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Creates a string representation of this queue. </p>
+<p>Elements are presented in the queue order from left to right.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>T(dummy)</strong> – This operation is available only if the element type <code class="docutils literal notranslate"><span class="pre">Elem</span></code> of the queue satisfies the <a class="reference internal" href="#conceptdsa_1_1Insertable"><span class="std std-ref">dsa::Insertable</span></a> concept. </p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>prefix</strong> – Text to prepend to the output string. Defaults to none. </p></li>
+<li><p><strong>sep</strong> – Sequence of characters to separate successive elements in the output string. Defaults to a single space character. </p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The string representation created. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3dsa6IQueue5frontEv">
+<span id="_CPPv3N3dsa6IQueue5frontEv"></span><span id="_CPPv2N3dsa6IQueue5frontEv"></span><span id="dsa::IQueue::front"></span><span class="target" id="classdsa_1_1IQueue_1a36f2314cd801756c8006a64c126fa038"></span><a class="reference internal" href="#_CPPv4I0I0E0EN3dsa6IQueueE" title="dsa::IQueue::Elem"><span class="n"><span class="pre">Elem</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">front</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3dsa6IQueue5frontEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Accesses the element at the front of this queue. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Throws<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">dsa</span><span class="p">::</span><a class="reference internal" href="#_CPPv4N3dsa15EmptyQueueErrorE" title="dsa::EmptyQueueError"><span class="n">EmptyQueueError</span></a></span></span> – if the queue is empty. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The front element. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3dsa6IQueue5frontEv">
+<span id="_CPPv3NK3dsa6IQueue5frontEv"></span><span id="_CPPv2NK3dsa6IQueue5frontEv"></span><span id="dsa::IQueue::frontC"></span><span class="target" id="classdsa_1_1IQueue_1aac63b0b5bf7fc476055e7722485c53fb"></span><a class="reference internal" href="#_CPPv4I0I0E0EN3dsa6IQueueE" title="dsa::IQueue::Elem"><span class="n"><span class="pre">Elem</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">front</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK3dsa6IQueue5frontEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Accesses (read-only) the element at the front of this queue. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Throws<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">dsa</span><span class="p">::</span><a class="reference internal" href="#_CPPv4N3dsa15EmptyQueueErrorE" title="dsa::EmptyQueueError"><span class="n">EmptyQueueError</span></a></span></span> – if the queue is empty. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The front element (immutable). </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3dsa6IQueue7enqueueERK4Elem">
+<span id="_CPPv3N3dsa6IQueue7enqueueERK4Elem"></span><span id="_CPPv2N3dsa6IQueue7enqueueERK4Elem"></span><span id="dsa::IQueue::enqueue__ElemCR"></span><span class="target" id="classdsa_1_1IQueue_1ae2392b45a4eb1773e86b94aca4653d00"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">enqueue</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0I0E0EN3dsa6IQueueE" title="dsa::IQueue::Elem"><span class="n"><span class="pre">Elem</span></span></a><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">elem</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3dsa6IQueue7enqueueERK4Elem" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Adds an element to the end of this queue. </p>
+<p>A deep copy of the element will be copy-constructed and then put into the queue.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>elem</strong> – The element to be added. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3dsa6IQueue7enqueueERR4Elem">
+<span id="_CPPv3N3dsa6IQueue7enqueueERR4Elem"></span><span id="_CPPv2N3dsa6IQueue7enqueueERR4Elem"></span><span id="dsa::IQueue::enqueue__ElemRR"></span><span class="target" id="classdsa_1_1IQueue_1a2d6c13c6e4e7cd9917aa759a3fdc370c"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">enqueue</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0I0E0EN3dsa6IQueueE" title="dsa::IQueue::Elem"><span class="n"><span class="pre">Elem</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">elem</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3dsa6IQueue7enqueueERR4Elem" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Adds an element to the end of this queue. </p>
+<p>The element will be put into the queue using move semantics.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>elem</strong> – The element to be added. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3dsa6IQueue7dequeueEv">
+<span id="_CPPv3N3dsa6IQueue7dequeueEv"></span><span id="_CPPv2N3dsa6IQueue7dequeueEv"></span><span id="dsa::IQueue::dequeue"></span><span class="target" id="classdsa_1_1IQueue_1aa16a8fc6ecc00e1254f41f0a70a34d00"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dequeue</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3dsa6IQueue7dequeueEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Removes the element at end of this queue. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Throws<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">dsa</span><span class="p">::</span><a class="reference internal" href="#_CPPv4N3dsa15EmptyQueueErrorE" title="dsa::EmptyQueueError"><span class="n">EmptyQueueError</span></a></span></span> – if this queue is empty. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4IDpEN3dsa6IQueue7emplaceEvDpRR4Args">
+<span id="_CPPv3IDpEN3dsa6IQueue7emplaceEDpRR4Args"></span><span id="_CPPv2IDpEN3dsa6IQueue7emplaceEDpRR4Args"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="sig-name descname"><span class="n"><span class="pre">Args</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="classdsa_1_1IQueue_1ac57f08186f9457f2747b7d5ec95965dc"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">emplace</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4IDpEN3dsa6IQueue7emplaceEvDpRR4Args" title="dsa::IQueue::emplace::Args"><span class="n"><span class="pre">Args</span></span></a><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="p"><span class="pre">...</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">args</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4IDpEN3dsa6IQueue7emplaceEvDpRR4Args" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Creates a new element in-place after the last element of this queue. </p>
+<p>The new element is constructed in-place using all of the arguments passed to this member function.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Strictly speaking, this is a convenient member function, and hence implementations without <code class="docutils literal notranslate"><span class="pre">emplace_&lt;...Args&gt;()</span></code> is still considered complete with respect to the Queue ADT in theory. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Args</strong> – Types of the arguments to be passed to the constructor of the element type <code class="docutils literal notranslate"><span class="pre">Elem</span></code>. </p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>args</strong> – Variable number of arguments to be passed to the constructor of the element type <code class="docutils literal notranslate"><span class="pre">Elem</span></code>. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="supporting-function">
+<h2>Supporting Function<a class="headerlink" href="#supporting-function" title="Permalink to this heading">#</a></h2>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I0I0E0EN3dsa7destroyEvP6IQueueI4Elem4ImplE">
+<span id="_CPPv3I0I0E0EN3dsa7destroyEP6IQueueI4Elem4ImplE"></span><span id="_CPPv2I0I0E0EN3dsa7destroyEP6IQueueI4Elem4ImplE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Elem</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Impl</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="namespacedsa_1ad92fb41e6aab58a7a8d51e4ae83080eb"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-prename descclassname"><span class="n"><span class="pre">dsa</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">destroy</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0I0E0EN3dsa6IQueueE" title="dsa::IQueue"><span class="n"><span class="pre">IQueue</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0I0E0EN3dsa7destroyEvP6IQueueI4Elem4ImplE" title="dsa::destroy::Elem"><span class="n"><span class="pre">Elem</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0I0E0EN3dsa7destroyEvP6IQueueI4Elem4ImplE" title="dsa::destroy::Impl"><span class="n"><span class="pre">Impl</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">queue</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0I0E0EN3dsa7destroyEvP6IQueueI4Elem4ImplE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Destroys a queue on the free store via a pointer. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>IMPORTANT</strong> This is the only proper way to destroy a queue via a base pointer. DO NOT use <code class="docutils literal notranslate"><span class="pre">delete</span> <span class="pre">queue;</span></code> in such context, which will lead to memory leak. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Elem</strong> – The element type. </p></li>
+<li><p><strong>Impl</strong> – The derived implementation class. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>queue</strong> – Pointer to a queue on the free store. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>NOTE: Client code that does not adopt static polymorphism will never need to
+call the <code class="docutils literal notranslate"><span class="pre">dsa::destroy()</span></code> function.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I_10InsertableI0E0EN3dsalsERNSt7ostreamERNSt7ostreamEPK6IQueueI4Elem4ImplE">
+<span id="_CPPv3I_10InsertableI0E0EN3dsalsERNSt7ostreamEPK6IQueueI4Elem4ImplE"></span><span id="_CPPv2I_10InsertableI0E0EN3dsalsERNSt7ostreamEPK6IQueueI4Elem4ImplE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0EN3dsa10InsertableE" title="dsa::Insertable"><span class="n"><span class="pre">Insertable</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Elem</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Impl</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="namespacedsa_1a04eff07037c80313642b442ab820146d"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-prename descclassname"><span class="n"><span class="pre">dsa</span></span><span class="p"><span class="pre">::</span></span></span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">&lt;&lt;</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ostream</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">os</span></span>, <a class="reference internal" href="#_CPPv4I0I0E0EN3dsa6IQueueE" title="dsa::IQueue"><span class="n"><span class="pre">IQueue</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I_10InsertableI0E0EN3dsalsERNSt7ostreamERNSt7ostreamEPK6IQueueI4Elem4ImplE" title="dsa::operator&lt;&lt;::Elem"><span class="n"><span class="pre">Elem</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I_10InsertableI0E0EN3dsalsERNSt7ostreamERNSt7ostreamEPK6IQueueI4Elem4ImplE" title="dsa::operator&lt;&lt;::Impl"><span class="n"><span class="pre">Impl</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">queue</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_10InsertableI0E0EN3dsalsERNSt7ostreamERNSt7ostreamEPK6IQueueI4Elem4ImplE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Writes the string representation of this queue to an output stream. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Elem</strong> – Type of each element of the queue. </p></li>
+<li><p><strong>Impl</strong> – The derived implementation class of the Queue ADT. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>os</strong> – The output stream to write to. </p></li>
+<li><p><strong>queue</strong> – The queue of which the string representation is to output. </p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The outstream to write to. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="concepts">
+<h2>Concepts<a class="headerlink" href="#concepts" title="Permalink to this heading">#</a></h2>
+<p>To make the member function <code class="docutils literal notranslate"><span class="pre">dsa::IQueue::to_string()</span></code> available, the
+element type <code class="docutils literal notranslate"><span class="pre">Elem</span></code> must satisfy the <code class="docutils literal notranslate"><span class="pre">dsa::Insertable</span></code> constraint, so that
+the insertion operator <code class="docutils literal notranslate"><span class="pre">&lt;&lt;</span></code> can be operated on the queue elements.</p>
+<dl class="cpp concept">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN3dsa10InsertableE">
+<span id="_CPPv3I0EN3dsa10InsertableE"></span><span id="_CPPv2I0EN3dsa10InsertableE"></span><span class="target" id="conceptdsa_1_1Insertable"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="k"><span class="pre">concept</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Insertable</span></span></span><a class="headerlink" href="#_CPPv4I0EN3dsa10InsertableE" title="Permalink to this definition">#</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;adt.hpp&gt;</em></div>
+<p>Specifies that the type <code class="docutils literal notranslate"><span class="pre">T</span></code> can be operated with the insertion operator <code class="docutils literal notranslate"><span class="pre">&lt;&lt;</span></code> as the right operand to write to an output stream that serves as the left operand. </p>
+<dl class="field-list simple">
+<dt class="field-odd">tparam T<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The type to test. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="exception">
+<h2>Exception<a class="headerlink" href="#exception" title="Permalink to this heading">#</a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N3dsa15EmptyQueueErrorE">
+<span id="_CPPv3N3dsa15EmptyQueueErrorE"></span><span id="_CPPv2N3dsa15EmptyQueueErrorE"></span><span id="dsa::EmptyQueueError"></span><span class="target" id="classdsa_1_1EmptyQueueError"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">EmptyQueueError</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">exception</span></span><a class="headerlink" href="#_CPPv4N3dsa15EmptyQueueErrorE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Empty queue error. </p>
+<p>An exception that indicates an operation on the queue is invalid when the queue is empty. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N3dsa15EmptyQueueError15EmptyQueueErrorENSt6stringE">
+<span id="_CPPv3N3dsa15EmptyQueueError15EmptyQueueErrorENSt6stringE"></span><span id="_CPPv2N3dsa15EmptyQueueError15EmptyQueueErrorENSt6stringE"></span><span id="dsa::EmptyQueueError::EmptyQueueError__ss"></span><span class="target" id="classdsa_1_1EmptyQueueError_1a53163f874b9a326f8e21b8df62d5addb"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">EmptyQueueError</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">custom_message</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;&quot;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3dsa15EmptyQueueError15EmptyQueueErrorENSt6stringE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Constructs a new Empty Queue Error object. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If no custom message is provided, the default error message will be used. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>custom_message</strong> – A custom message. Defaults to none. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK3dsa15EmptyQueueError4whatEv">
+<span id="_CPPv3NK3dsa15EmptyQueueError4whatEv"></span><span id="_CPPv2NK3dsa15EmptyQueueError4whatEv"></span><span id="dsa::EmptyQueueError::whatC"></span><span class="target" id="classdsa_1_1EmptyQueueError_1a5ab033f94593c98739bb4d0f62eb08ed"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">what</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">noexcept</span></span><span class="w"> </span><span class="k"><span class="pre">override</span></span><a class="headerlink" href="#_CPPv4NK3dsa15EmptyQueueError4whatEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Gets the error message. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-attributes">Public Static Attributes</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N3dsa15EmptyQueueError11default_msgE">
+<span id="_CPPv3N3dsa15EmptyQueueError11default_msgE"></span><span id="_CPPv2N3dsa15EmptyQueueError11default_msgE"></span><span id="dsa::EmptyQueueError::default_msg__cCP"></span><span class="target" id="classdsa_1_1EmptyQueueError_1a293c466aef294d5c6228e542001ca2e7"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">default_msg</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;invalid</span> <span class="pre">operation</span> <span class="pre">on</span> <span class="pre">an</span> <span class="pre">empty</span> <span class="pre">queue&quot;</span></span><a class="headerlink" href="#_CPPv4N3dsa15EmptyQueueError11default_msgE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Default error message </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="circ_array_queue.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Circular Array Queue</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../references.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">API References</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022 - 2023, KriztoferY (https://github.com/KriztoferY)
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">The Interface</a><ul>
+<li><a class="reference internal" href="#abstract-data-type-adt">Abstract Data Type (ADT)</a></li>
+<li><a class="reference internal" href="#supporting-function">Supporting Function</a></li>
+<li><a class="reference internal" href="#concepts">Concepts</a></li>
+<li><a class="reference internal" href="#exception">Exception</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    </body>
+</html>

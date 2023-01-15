@@ -45,7 +45,8 @@
 
 # Documentation - compiled files
 docs/doxygen
-docs/build
+docs/build/*
+!docs/build/html
 
 ## Local 
 
